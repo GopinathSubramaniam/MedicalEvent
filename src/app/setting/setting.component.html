@@ -1,0 +1,201 @@
+<section class="content-header">
+  <h4>
+    <i class="fa fa-gears"></i> Setting
+  </h4>
+  <ol class="breadcrumb">
+    <li><a routerLink="/"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Setting</li>
+  </ol>
+</section>
+
+
+<div class="box box-default">
+  <!-- /.box-header -->
+  <div class="row">
+    <div class="col-lg-12">
+      <button class="btn btn-primary btn-sm pull-right" (click)="displayIDProofDialog = true;">
+        <i class="fa fa-plus"></i> Add ID Proof
+      </button>
+      <button class="btn btn-primary btn-sm pull-right" (click)="displayQualiDialog = true;">
+        <i class="fa fa-plus"></i> Add Qualification
+      </button>
+
+      <p-tabView>
+        <p-tabPanel header="Qualifications">
+          <ng-container *ngTemplateOutlet="qualificationsTabContent"></ng-container>
+        </p-tabPanel>
+        <p-tabPanel header="ID Proof">
+          <ng-container *ngTemplateOutlet="idproofTabContent"></ng-container>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #qualificationsTabContent>
+  <p-table [value]="qualificationList" [responsive]="true">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Degree</th>
+        <th>Abberivation</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td>{{data.Degree}}</td>
+        <td>{{data.Abberivation}}</td>
+        <td>
+          <button class="btn btn-xs btn-primary" (click)="editQualification(data)">
+            <i class="fa fa-pencil"></i>
+            Edit
+          </button>
+          <button class="btn btn-danger btn-xs"
+            (click)="displayDeleteConfimModal = true; currPage = ('QUALI-'+data.id)">
+            <i class="fa fa-trash"></i> Delete
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-template>
+
+<ng-template #idproofTabContent>
+  <p-table [value]="idproofList" [responsive]="true">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td>{{data.Name}}</td>
+        <td>{{data.Description}}</td>
+        <td>
+          <button class="btn btn-xs btn-primary" (click)="editIDProof(data)">
+            <i class="fa fa-pencil"></i>
+            Edit
+          </button>
+          <button class="btn btn-danger btn-xs"
+            (click)="displayDeleteConfimModal = true; currPage = ('IDPROOF-'+data.id)">
+            <i class="fa fa-trash"></i> Delete
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-template>
+
+
+<p-dialog [(visible)]="displayQualiDialog" appendTo="body" [style]="{width: '30vw'}" [responsive]="true" [modal]="true"
+  (onHide)="resetQualiForm()">
+  <p-header>
+    <i class="fa fa-book"></i>
+    <span *ngIf="!qualificationForm.value.id">
+      Add Quanlification
+    </span>
+    <span *ngIf="qualificationForm.value.id">
+      Edit Quanlification
+    </span>
+  </p-header>
+  <div>
+    <form [formGroup]="qualificationForm">
+      <input type="hidden" formControlName="id">
+      <div class="form-group">
+        <label>Degree</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-book"></i>
+          </div>
+          <input type="text" formControlName="Degree" class="form-control pull-right" id="title" placeholder="Degree">
+        </div>
+        <div *ngIf="qSubmitted && qForm.Degree.errors" class="invalid-feedback text-danger">
+          <div *ngIf="qForm.Degree.errors.required">Degree is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Abberivation</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-info"></i>
+          </div>
+          <input type="text" formControlName="Abberivation" class="form-control pull-right" id="title"
+            placeholder="Abberivation">
+        </div>
+        <div *ngIf="qSubmitted && qForm.Abberivation.errors" class="invalid-feedback text-danger">
+          <div *ngIf="qForm.Abberivation.errors.required">Abberivation is required</div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <p-footer>
+    <button class="btn btn-default" (click)="displayQualiDialog = false;">Cancel</button>
+    <button class="btn btn-primary" (click)="createQualification()">Save</button>
+  </p-footer>
+</p-dialog>
+
+
+<p-dialog [(visible)]="displayIDProofDialog" appendTo="body" [style]="{width: '30vw'}" [responsive]="true"
+  [modal]="true" (onHide)="resetIDProofForm()">
+  <p-header>
+    <i class="fa fa-id-card-o"></i>
+    <span *ngIf="!idproofForm.value.id">
+      Add ID Proof
+    </span>
+    <span *ngIf="idproofForm.value.id">
+      Edit ID Proof
+    </span>
+  </p-header>
+  <div>
+    <form [formGroup]="idproofForm">
+      <input type="hidden" formControlName="id">
+      <div class="form-group">
+        <label>Proof Name</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-id-card-o"></i>
+          </div>
+          <input type="text" formControlName="Name" class="form-control pull-right" id="title" placeholder="Proof Name">
+        </div>
+        <div *ngIf="idSubmitted && iForm.Name.errors" class="invalid-feedback text-danger">
+          <div *ngIf="iForm.Name.errors.required">Name is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-info"></i>
+          </div>
+          <input type="text" formControlName="Description" class="form-control pull-right" id="title"
+            placeholder="Description">
+        </div>
+        <div *ngIf="idSubmitted && iForm.Description.errors" class="invalid-feedback text-danger">
+          <div *ngIf="iForm.Description.errors.required">Description is required</div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <p-footer>
+    <button class="btn btn-default" (click)="displayIDProofDialog = false">Cancel</button>
+    <button class="btn btn-primary" (click)="createIdProof()">Save</button>
+  </p-footer>
+</p-dialog>
+
+<p-dialog [(visible)]="displayDeleteConfimModal" appendTo="body" [style]="{width: '30vw'}" [responsive]="true"
+  [modal]="true">
+  <p-header>
+    <i class="fa fa-exclamation-triangle"></i> Confirmation
+  </p-header>
+  <div>
+    Are you sure you want to delete this record?
+  </div>
+  <p-footer>
+    <button class="btn btn-default btn-sm" (click)="displayDeleteConfimModal = false"><i class="fa fa-times"></i>
+      Close</button>
+    <button class="btn btn-primary btn-sm" (click)="deleteItem()"><i class="fa fa-check"></i> Confirm</button>
+  </p-footer>
+</p-dialog>

@@ -1,0 +1,21 @@
+<div class="navbar-custom-menu">
+  <ul class="nav navbar-nav">
+    <li mk-dropdown type="list" [isWrapper]="false" class="user user-menu">
+      <mk-dropdown-toggle>
+        <a #toggleElement>
+          <img src="assets/img/user2-160x160.jpg" class="user-image" alt="User Image">
+          <span class="hidden-xs">{{userName}}</span>
+        </a>
+      </mk-dropdown-toggle>
+      <mk-dropdown-menu>
+        <li class="user-body">
+          <div class="row">
+            <div class="col-xs-12 pointer" (click)="logout()">
+              <a><i class="fa fa-sign-out"></i> Signout</a>
+            </div>
+          </div>
+        </li>
+      </mk-dropdown-menu>
+    </li>
+  </ul>
+</div>

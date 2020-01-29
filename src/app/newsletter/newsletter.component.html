@@ -1,0 +1,116 @@
+<section class="content-header">
+  <h4>
+    <i class="fa fa-newspaper-o"></i> Newsletters
+  </h4>
+  <ol class="breadcrumb">
+    <li><a routerLink="/"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Newsletters</li>
+  </ol>
+</section>
+<section class="content">
+  <p-table #nt [value]="newsletterList" [responsive]="true" [globalFilterFields]="['Title']">
+    <ng-template pTemplate="caption">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="col-lg-6">
+            <div class="form-group m-0">
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                <input type="text" class="form-control input-sm" placeholder="Enter any text to search"
+                  (input)="nt.filterGlobal($event.target.value, 'contains')">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group pull-right m-0">
+              <div class="input-group">
+                <button class="btn btn-primary btn-sm" (click)="displayAddNewsletterModal = true">
+                  <i class="fa fa-plus"></i> Add Newsletter
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td>{{data.Title}}</td>
+        <td>{{data.Content}}</td>
+        <td>
+          <button class="btn btn-xs btn-primary">
+            <i class="fa fa-send"></i>
+            Send Newsletter
+          </button>
+          <button class="btn btn-danger btn-xs" (click)="displayDeleteConfimModal = true; selectedId = data.id">
+            <i class="fa fa-trash"></i> Delete
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</section>
+
+
+<p-dialog [(visible)]="displayAddNewsletterModal" appendTo="body" [style]="{width: '30vw'}" [responsive]="true"
+  [modal]="true" (onHide)="resetNewsletterModal()">
+  <p-header>
+    <i class="fa fa-id-card-o"></i> Add Newsletter
+  </p-header>
+  <div>
+    <form [formGroup]="newsletterForm">
+      <input type="hidden" formControlName="id">
+      <div class="form-group">
+        <label>Title</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-id-card-o"></i>
+          </div>
+          <input type="text" formControlName="Title" class="form-control" placeholder="Title">
+        </div>
+        <div *ngIf="submitted && f.Title.errors" class="invalid-feedback text-danger">
+          <div *ngIf="f.Title.errors.required">Title is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-info"></i>
+          </div>
+          <input type="file" formControlName="file" class="form-control" placeholder="Select File"
+            (change)="onFileChange($event)">
+        </div>
+        <div *ngIf="submitted && f.file.errors" class="invalid-feedback text-danger">
+          <div *ngIf="f.file.errors.required">Please select file</div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <p-footer>
+    <button class="btn btn-default btn-sm" (click)="displayAddNewsletterModal = false"><i class="fa fa-times"></i>
+      Cancel</button>
+    <button class="btn btn-primary btn-sm" (click)="createNewletter()"><i class="fa fa-floppy-o"></i> Save</button>
+  </p-footer>
+</p-dialog>
+
+<p-dialog [(visible)]="displayDeleteConfimModal" appendTo="body" [style]="{width: '30vw'}" [responsive]="true"
+  [modal]="true">
+  <p-header>
+    <i class="fa fa-exclamation-triangle"></i> Confirmation
+  </p-header>
+  <div>
+    Are you sure you want to delete this record?
+  </div>
+  <p-footer>
+    <button class="btn btn-default btn-sm" (click)="displayDeleteConfimModal = false"><i class="fa fa-times"></i> Close</button>
+    <button class="btn btn-primary btn-sm" (click)="deleteNewsletter()"> <i class="fa fa-check"></i> Confirm</button>
+  </p-footer>
+</p-dialog>

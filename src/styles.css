@@ -1,0 +1,60 @@
+/* You can add global styles to this file, and also import other style files */
+
+.table-bordered>thead>tr>th,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>td,
+.table-bordered>tbody>tr>td,
+.table-bordered>tfoot>tr>td {
+  border-color: #eae3e3;
+}
+
+
+.padding-zero {
+  padding: 0 !important;
+}
+
+section.content {
+  padding: 5px;
+}
+
+section.content-header {
+  padding: 5px;
+}
+
+.ui-table.ui-widget {
+  font-size: 80%;
+}
+
+button.btn {
+  margin: 2px;
+}
+
+.dialog-sm {
+  width: 500px !important;
+}
+
+input.ui-inputtext {
+  border-radius: 0px !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+body .ui-chkbox-label {
+  padding: 0 0 0 1em !important;
+}
+
+pr-1 {
+  padding: 0 0 0 1em;
+}
+
+.ui-toast.ui-widget {
+  z-index: 1030 !important;
+}
+
+
+.m-0{
+  margin: 0;
+}

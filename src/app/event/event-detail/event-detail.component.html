@@ -1,0 +1,867 @@
+<section class="content-header">
+  <h4>
+    <i class="fa fa-file"></i> Woundcare
+  </h4>
+  <ol class="breadcrumb">
+    <li><a routerLink="/"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li routerLink="/events">Event List</li>
+    <li class="active">Woundcare</li>
+  </ol>
+</section>
+
+<section class="content">
+
+  <!-- SELECT2 EXAMPLE -->
+  <div class="box box-default">
+    <!-- /.box-header -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="box-header">
+          <div class="pull-right">
+            <!-- <a href="manage-event.html" class="btn btn-primary btn-sm">
+                    <i class="fa fa-qrcode"></i> Manage Event
+                 </a> &nbsp; -->
+            <button class="btn btn-primary btn-sm" (click)="displayCreateSessionModal = true;">
+              <i class="fa fa-plus"></i> Create Session Form
+            </button>
+            <button class="btn btn-primary btn-sm" (click)="displayCreateCouponModal = true">
+              <i class="fa fa-ticket"></i> Create Free Coupons
+            </button>
+            <button class="btn btn-primary btn-sm" (click)="displayUploadFilesModal = true">
+              <i class="fa fa-upload"></i> Upload Files
+            </button>
+            <button class="btn btn-primary btn-sm" (click)="displayCreateStallModal = true">
+              <i class="fa fa-hospital-o" aria-hidden="true"></i> Create Stall
+            </button>
+            <button class="btn btn-primary btn-sm" (click)="displayCreateInteractiveModal = true">
+              <i class="fa fa-question-circle" aria-hidden="true"></i> Create Interactive
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <p-tabView>
+            <p-tabPanel header="Detail">
+              <ng-container *ngTemplateOutlet="detail"></ng-container>
+            </p-tabPanel>
+            <p-tabPanel header="Sessions">
+              <ng-container *ngTemplateOutlet="sessions"></ng-container>
+            </p-tabPanel>
+            <p-tabPanel header="Free Coupons">
+              <ng-container *ngTemplateOutlet="freeCoupons"></ng-container>
+            </p-tabPanel>
+            <p-tabPanel header="Certificate">
+              <ng-container *ngTemplateOutlet="certificate"></ng-container>
+            </p-tabPanel>
+            <p-tabPanel header="Event Users">
+              <ng-container *ngTemplateOutlet="eventUsers"></ng-container>
+            </p-tabPanel>
+            <p-tabPanel header="Stalls">
+              <ng-container *ngTemplateOutlet="stalls"></ng-container>
+            </p-tabPanel>
+            <p-tabPanel header="Rating Views">
+              <ng-container *ngTemplateOutlet="ratingViews"></ng-container>
+            </p-tabPanel>
+            <p-tabPanel header="Manage Food">
+              <ng-container *ngTemplateOutlet="manageFood"></ng-container>
+            </p-tabPanel>
+            <p-tabPanel header="Payment Info">
+              <ng-container *ngTemplateOutlet="paymentInfo"></ng-container>
+            </p-tabPanel>
+            <p-tabPanel header="Interactive Session">
+              <ng-container *ngTemplateOutlet="interactiveSession"></ng-container>
+            </p-tabPanel>
+            <p-tabPanel header="QR Codes">
+              <ng-container *ngTemplateOutlet="qrCodes"></ng-container>
+            </p-tabPanel>
+          </p-tabView>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #detail>
+  <div>
+    <div class="row">
+      <!-- Event Details #START -->
+      <div class="col-sm-6">
+        <div class="box-header with-border">
+          <h3 class="box-title">
+            <i class="fa fa-calendar-o" aria-hidden="true"></i> Event Detail
+          </h3>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Name</label>
+            <div class="col-sm-8">
+              <p>Woundcare</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Start Date</label>
+            <div class="col-sm-8">
+              <p>20-01-2020</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">End Date</label>
+            <div class="col-sm-8">
+              <p>21-01-2020</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Registration Close Date</label>
+            <div class="col-sm-8">
+              <p>15-01-2020</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Registration Fee</label>
+            <div class="col-sm-8">
+              <p><i class="fa fa-inr"></i> 300.00</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Kit Count</label>
+            <div class="col-sm-8">
+              <p>10</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Venue</label>
+            <div class="col-sm-8">
+              <p>35/1, Muniappan kovil street</p>
+              <p>Maari amman kovil street</p>
+              <p>Erode-638004</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Event Details #END -->
+
+      <!-- Organiser Details #START -->
+      <div class="col-lg-6">
+        <div class="box-header with-border">
+          <h3 class="box-title">
+            <i class="fa fa-tripadvisor" aria-hidden="true"></i> Organiser Detail
+          </h3>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Organiser</label>
+            <div class="col-sm-8">
+              <p>Yogesh</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Email</label>
+            <div class="col-sm-8">
+              <p>itsupport@nexware-global.com</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Phone 1</label>
+            <div class="col-sm-8">
+              <p>+91-9637752262</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Phone 2</label>
+            <div class="col-sm-8">
+              <p>+91-9637752262</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">GSTIN #</label>
+            <div class="col-sm-8">
+              <p>ASDF12313123ZZXZ</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">PAN #</label>
+            <div class="col-sm-8">
+              <p>BOKPG6920E</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">CIN #</label>
+            <div class="col-sm-8">
+              <p>BOKPG6920E</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">CGST%</label>
+            <div class="col-sm-8">
+              <p>10%</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">SGST%</label>
+            <div class="col-sm-8">
+              <p>10%</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Website Url</label>
+            <div class="col-sm-8">
+              <p><a href="#" style="text-decoration: underline;">https://translate.google.co.jp/?hl=en&tab=rT</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Address</label>
+            <div class="col-sm-8">
+              <p>35/1, Muniappan kovil street</p>
+              <p>Maari amman kovil street</p>
+              <p>Erode-638004</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Organiser Details #END -->
+    </div>
+    <!-- Registration Details #START -->
+    <div>
+      <div class="box-header with-border">
+        <h3 class="box-title">
+          <i class="fa fa-registered" aria-hidden="true"></i> Registration Detail
+        </h3>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">Early Bird Date</label>
+          <div class="col-sm-8">
+            <p>15-01-2020</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">Price</label>
+          <div class="col-sm-8">
+            <p><i class="fa fa-inr"></i> 500.00</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">Post Early Bird</label>
+          <div class="col-sm-8">
+            <p><i class="fa fa-inr"></i> 500.00</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">CME Points</label>
+          <div class="col-sm-8">
+            <p>50</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Registration Details #END -->
+  </div>
+</ng-template>
+
+<ng-template #sessions>
+  <p-table [value]="sessionList" [responsive]="true">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Title</th>
+        <th>Date Time Range</th>
+        <th>Type</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td>{{data.title}}</td>
+        <td>{{data.dateTimeRange}}</td>
+        <td>{{data.type}}</td>
+        <td>
+          <button class="btn btn-xs btn-primary" (click)="displayCreateSessionModal = true;">
+            <i class="fa fa-pencil"></i>
+            Edit
+          </button>
+          <button class="btn btn-danger btn-xs">
+            <i class="fa fa-trash"></i> Delete
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-template>
+
+<ng-template #freeCoupons>
+  <p-table [value]="freeCouponList" [responsive]="true">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Title</th>
+        <th>Purpose</th>
+        <th># of coupons</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td>{{data.title}}</td>
+        <td>{{data.purpose}}</td>
+        <td>{{data.noOfCoupons}}</td>
+        <td>
+          <button class="btn btn-xs btn-primary" (click)="displayCouponListModal = true">
+            <i class="fa fa-eye"></i>
+            View Coupons
+          </button>
+          <button class="btn btn-danger btn-xs">
+            <i class="fa fa-trash"></i> Delete
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-template>
+
+<ng-template #certificate>
+  <div class="container-fluid" style="padding-left: 0px">
+    <div class="col-lg-6">
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTipsjo2yLeqfMIcp0sZc3SJTWrXb-fGMzR1H37u0btHR0Ogz1G"
+        class="img-responsive">
+    </div>
+    <div class="col-lg-6">
+      <img src="http://designschoolindia.in/upload/97038matcha-uoy.jpg" style="cursor: pointer;" class="img-responsive">
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #eventUsers>
+  <p-table [value]="eventUserList" [responsive]="true">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th>
+        <th>Organiser</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Payment Method</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td>{{data.name}}</td>
+        <td>{{data.organiser}}</td>
+        <td>{{data.startDate}}</td>
+        <td>{{data.endDate}}</td>
+        <td>
+          <span *ngIf="data.paymentMode === 'CASH'">
+            <i class="fa fa-money"></i> Cash
+          </span>
+          <span *ngIf="data.paymentMode === 'CHEQUE'">
+            <i class="fa fa-money"></i> Cheque
+          </span>
+          <span *ngIf="data.paymentMode === 'CC'">
+            <i class="fa fa-credit-card-alt"></i> Credit Card
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-xs btn-primary">
+            <i class="fa fa-eye"></i>
+            View
+          </button>
+          <button class="btn btn-primary btn-xs" *ngIf="data.paymentMode === 'CASH' || data.paymentMode === 'CHEQUE'">
+            <i class="fa fa-thumbs-o-up"></i> Approve
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-template>
+
+<ng-template #stalls>
+  <p-table [value]="stallList" [responsive]="true">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Stall Name</th>
+        <th>Owner Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td>{{data.stallName}}</td>
+        <td>{{data.ownerName}}</td>
+        <td>{{data.phone}}</td>
+        <td>{{data.email}}</td>
+        <td>
+          <button class="btn btn-xs btn-primary" (click)="displayQRCodeModal = true">
+            <i class="fa fa-eye"></i> View QR
+          </button>
+          <button class="btn btn-primary btn-xs">
+            <i class="fa fa-pencil"></i> Edit
+          </button>
+          <button class="btn btn-danger btn-xs">
+            <i class="fa fa-trash"></i> Delete
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-template>
+
+<ng-template #ratingViews>
+  <p-table [value]="ratingList" [responsive]="true">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>User</th>
+        <th>Overall</th>
+        <th>Topics</th>
+        <th>Speaker</th>
+        <th>Food</th>
+        <th>Description</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td>{{data.user}}</td>
+        <td>
+          <p-rating [cancel]="false"></p-rating>
+        </td>
+        <td>
+          <p-rating [cancel]="false"></p-rating>
+        </td>
+        <td>
+          <p-rating [cancel]="false"></p-rating>
+        </td>
+        <td>
+          <p-rating [cancel]="false"></p-rating>
+        </td>
+        <td>{{data.desc}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-template>
+
+<ng-template #manageFood>
+
+</ng-template>
+
+<ng-template #paymentInfo>
+
+</ng-template>
+
+<ng-template #interactiveSession>
+
+</ng-template>
+
+<ng-template #qrCodes>
+
+</ng-template>
+
+
+<!-- ngprime Dialogs #START-->
+<p-dialog header="Create Session" [(visible)]="displayCreateSessionModal" [styleClass]="'dialog-sm'" [responsive]="true"
+  showEffect="fade" [modal]="true" [baseZIndex]="3003" [appendTo]="'body'">
+  <div>
+    <div class="form-group">
+      <label>Title</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-tag"></i>
+        </div>
+        <input type="text" class="form-control pull-right" id="title" placeholder="Title">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Date Time Range</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-clock-o"></i>
+        </div>
+        <p-calendar hideOnDateTimeSelect="true" showTime="true" hourFormat="24" placeholder="Date Time Range" showButtonBar="true"
+          [baseZIndex]="3005" [appendTo]="'body'" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
+        </p-calendar>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Session Fee</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-money"></i>
+        </div>
+        <input type="number" class="form-control pull-right" id="cost" placeholder="Cost" value="0">
+      </div>
+      <small>Enter cost <b>0</b> if this session is Free</small>
+    </div>
+  </div>
+  <p-footer>
+    <div>
+      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"
+        (click)="displayCreateSessionModal = false;">
+        <i class="fa fa-times"></i> Close
+      </button>
+      <button type="button" class="btn btn-primary btn-sm" (click)="displayCreateSessionModal = false;">
+        <i class="fa fa-check"></i> Save
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+
+<p-dialog header="Create Free Entry Coupon" [(visible)]="displayCreateCouponModal" [styleClass]="'dialog-sm'"
+  [responsive]="true" showEffect="fade" [modal]="true" [baseZIndex]="3003" [appendTo]="'body'">
+  <div>
+    <div class="form-group">
+      <label>Title</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-tag"></i>
+        </div>
+        <input type="text" class="form-control pull-right" id="title" placeholder="Title">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Purpose</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-info"></i>
+        </div>
+        <input type="text" class="form-control pull-right" id="title" placeholder="Purpose">
+      </div>
+    </div>
+    <div class="form-group">
+      <label># of coupon</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-list-ol"></i>
+        </div>
+        <input type="number" class="form-control pull-right" id="title" placeholder="# of coupon">
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div>
+      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"
+        (click)="displayCreateCouponModal = false;">
+        <i class="fa fa-times"></i> Close
+      </button>
+      <button type="button" class="btn btn-primary btn-sm" (click)="displayCreateCouponModal = false;">
+        <i class="fa fa-check"></i> Save
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<p-dialog header="Upload Files" [(visible)]="displayUploadFilesModal" [styleClass]="'dialog-sm'" [responsive]="true"
+  showEffect="fade" [modal]="true" [baseZIndex]="3003" [appendTo]="'body'">
+  <div>
+    <div class="form-group">
+      <div class="col-lg-12">
+        <label>Select Certificate Type</label>
+      </div>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-file"></i>
+        </div>
+        <select type="file" class="form-control pull-right" id="selectFileType" placeholder="Select Certificate">
+          <option value="COMMON">Common Template</option>
+          <option value="CERTIFICATE">Upload Certificate</option>
+          <option value="BROCHURE">Upload Brochure</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group" id="selectFileElem">
+      <div class="col-lg-12">
+        <label>Select File</label>
+      </div>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-file"></i>
+        </div>
+        <input type="file" class="form-control pull-right" id="selectFile" placeholder="Select File">
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div>
+      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"
+        (click)="displayUploadFilesModal = false;">
+        <i class="fa fa-times"></i> Close
+      </button>
+      <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
+        (click)="displayUploadFilesModal = false;">
+        <i class="fa fa-upload"></i> Save
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<p-dialog header="Create Stall" [(visible)]="displayCreateStallModal" [style]="{'width': '500px'}"
+  [styleClass]="'dialog-md'" [responsive]="true" showEffect="fade" [modal]="true" [baseZIndex]="3003"
+  [appendTo]="'body'">
+  <div>
+    <div class="form-group">
+      <label>Company Name</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-tag"></i>
+        </div>
+        <input type="text" class="form-control pull-right" id="title" placeholder="Company Name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Contact Name</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-user"></i>
+        </div>
+        <input type="text" class="form-control pull-right" id="title" placeholder="Contact Name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Contact Person Position</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-star"></i>
+        </div>
+        <input type="text" class="form-control pull-right" id="title" placeholder="Contact Person Position">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Phone</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-phone" aria-hidden="true"></i>
+        </div>
+        <input type="text" class="form-control pull-right" id="title" placeholder="Phone">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+        </div>
+        <input type="text" class="form-control pull-right" id="title" placeholder="Email">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Website</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-globe" aria-hidden="true"></i>
+        </div>
+        <input type="text" class="form-control pull-right" id="title" placeholder="Website">
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div>
+      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"
+        (click)="displayCreateStallModal = false;">
+        <i class="fa fa-times"></i> Close
+      </button>
+      <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
+        (click)="displayCreateStallModal = false;">
+        <i class="fa fa-check"></i> Save
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<p-dialog header="Create Interactive" [(visible)]="displayCreateInteractiveModal" [styleClass]="'dialog-sm'"
+  [responsive]="true" showEffect="fade" [modal]="true" [baseZIndex]="3003" [appendTo]="'body'">
+  <div>
+    <div class="form-group">
+      <label>Question</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-tag"></i>
+        </div>
+        <input type="text" class="form-control pull-right" id="title" placeholder="Question">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Answer 1</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-commenting"></i>
+        </div>
+        <input type="text" class="form-control pull-right" id="title" placeholder="Answer 1">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Answer 2</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-commenting"></i>
+        </div>
+        <input type="text" class="form-control pull-right" id="title" placeholder="Answer 2">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Answer 3</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-commenting" aria-hidden="true"></i>
+        </div>
+        <input type="text" class="form-control pull-right" id="title" placeholder="Answer 3">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Answer 4</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-commenting" aria-hidden="true"></i>
+        </div>
+        <input type="text" class="form-control pull-right" id="title" placeholder="Answer 4">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Select Answer</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-commenting" aria-hidden="true"></i>
+        </div>
+        <select type="text" class="form-control pull-right" id="title" placeholder="Answer 4">
+          <option>-- Select --</option>
+          <option>Answer 1</option>
+          <option>Answer 2</option>
+          <option>Answer 3</option>
+          <option>Answer 4</option>
+        </select>
+
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div>
+      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"
+        (click)="displayCreateInteractiveModal = false;">
+        <i class="fa fa-times"></i> Close
+      </button>
+      <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
+        (click)="displayCreateInteractiveModal = false;">
+        <i class="fa fa-check"></i> Save
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<p-dialog header="Coupons" [(visible)]="displayCouponListModal" [styleClass]="'dialog-sm'" [responsive]="true"
+  showEffect="fade" [modal]="true" [baseZIndex]="3003" [appendTo]="'body'">
+  <div class="container-fluid padding-zero">
+    <button type="button" class="btn btn-primary btn-sm pull-right" data-dismiss="modal"
+      (click)="displayCouponListModal = false;">
+      <i class="fa fa-download"></i> Download
+    </button>
+  </div>
+
+  <div>
+    <ul class="list-group">
+      <li class="list-group-item"><label>Coupon</label>
+        <div class="checkbox icheck pull-right col-md-1" style="margin-top: 0rem;">
+          <label>
+            <p-checkbox name="couponParentCheckbox" id="couponParentCheckbox"></p-checkbox>
+          </label>
+        </div>&nbsp;
+        <label class="pull-right">Copy</label>
+      </li>
+      <li class="list-group-item">SDFG45
+        <div class="checkbox icheck pull-right col-md-1" style="margin-top: -0.5rem;">
+          <label>
+            <p-checkbox name="couponParentCheckbox" id="childCheckbox"></p-checkbox>
+          </label>
+        </div>&nbsp;
+        <i class="fa fa-clone pointer pull-right" aria-hidden="true" data-toggle="tooltip" data-placement="top"
+          title="Copy"></i>
+      </li>
+      <li class="list-group-item">345SDS
+        <div class="checkbox icheck pull-right col-md-1" style="margin-top: -0.5rem;">
+          <label>
+            <p-checkbox name="couponParentCheckbox" id="childCheckbox"></p-checkbox>
+          </label>
+        </div>&nbsp;
+        <i class="fa fa-clone pointer pull-right" aria-hidden="true" data-toggle="tooltip" data-placement="top"
+          title="Copy"></i>
+      </li>
+      <li class="list-group-item">DF45G7
+        <div class="checkbox icheck pull-right col-md-1" style="margin-top: -0.5rem;">
+          <label>
+            <p-checkbox name="couponParentCheckbox" id="childCheckbox"></p-checkbox>
+          </label>
+        </div>&nbsp;
+        <i class="fa fa-clone pointer pull-right" aria-hidden="true" data-toggle="tooltip" data-placement="top"
+          title="Copy"></i>
+      </li>
+    </ul>
+  </div>
+  <p-footer>
+    <div>
+      <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"
+        (click)="displayCouponListModal = false;">
+        <i class="fa fa-trash"></i> Delete Selected
+      </button>
+      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"
+        (click)="displayCouponListModal = false;">
+        <i class="fa fa-times"></i> Close
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<p-dialog header="QR Code" [(visible)]="displayQRCodeModal" [styleClass]="'dialog-sm'" [responsive]="true"
+  showEffect="fade" [modal]="true" [baseZIndex]="3003" [appendTo]="'body'">
+
+  <div align="center">
+    <img
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS39NsNCuE6j9gAlNwQ6EgRsfwnNYui7djSRi7UxnS8BMpol_QPQg&s" />
+  </div>
+  <p-footer>
+    <div>
+      <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" (click)="displayQRCodeModal = false;">
+        <i class="fa fa-download"></i> Download
+      </button>
+      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" (click)="displayQRCodeModal = false;">
+        <i class="fa fa-times"></i> Close
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>
+<!-- ngprime Dialogs #END-->

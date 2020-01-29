@@ -1,0 +1,142 @@
+<div class="padding-zero">
+  <section class="content-header">
+    <h4>
+      <i class="fa fa-file"></i> Events
+    </h4>
+    <ol class="breadcrumb">
+      <li><a routerLink="/"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Event List</li>
+    </ol>
+  </section>
+  <section class="content">
+    <p-table #dt [value]="events" [responsive]="true" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,30,50]"
+      [globalFilterFields]="['name','organiser','publish']">
+      <ng-template pTemplate="caption">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                  <input type="text" class="form-control input-sm" placeholder="Enter any text to search"
+                    (input)="dt.filterGlobal($event.target.value, 'contains')">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group pull-right">
+                <div class="input-group">
+                  <a routerLink="add" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add New Event</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th [pSortableColumn]="'name'">
+            Name
+            <p-sortIcon [field]="'name'"></p-sortIcon>
+          </th>
+          <th [pSortableColumn]="'organiser'">
+            Organiser
+            <p-sortIcon [field]="'organiser'"></p-sortIcon>
+          </th>
+          <th [pSortableColumn]="'startDate'">
+            Start Date
+            <p-sortIcon [field]="'startDate'"></p-sortIcon>
+          </th>
+          <th [pSortableColumn]="'endDate'">
+            End Date
+            <p-sortIcon [field]="'endDate'"></p-sortIcon>
+          </th>
+          <th [pSortableColumn]="'publish'">
+            Publish
+            <p-sortIcon [field]="'publish'"></p-sortIcon>
+          </th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-event>
+        <tr>
+          <td>
+            <span class="ui-column-title">Name</span>
+            {{event.name}}
+          </td>
+          <td>
+            <span class="ui-column-title">Organiser</span>
+            {{event.organiser}}
+          </td>
+          <td>
+            <span class="ui-column-title">Start Date</span>
+            {{event.startDate}}
+          </td>
+          <td>
+            <span class="ui-column-title">End Date</span>
+            {{event.endDate}}
+          </td>
+          <td>
+            <span class="ui-column-title">Publish</span>
+            {{event.publish}}
+          </td>
+          <td>
+            <a routerLink="detail" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View</a>
+            &nbsp;
+            <button class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</button>
+            &nbsp;
+            <button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </section>
+</div>
+
+
+
+
+
+<p-dialog header="Add Event" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade"
+  [modal]="true" [style]="{width: '300px'}" [baseZIndex]="3003" [styleClass]="dialogWarn-fix" [appendTo]="'body'">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="vin">Name</label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" class="form-control" id="brand" autofocus />
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Organiser</label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" class="form-control" id="brand" autofocus />
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="brand">Start Date</label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" class="form-control" id="brand" autofocus />
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="color">End Date</label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" class="form-control" id="brand" autofocus />
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" class="btn btn-primary" icon="fa fa-close" (click)="delete()">Delete</button>
+      <button type="button" class="btn btn-primary" icon="fa fa-check" (click)="save()">Save</button>
+    </div>
+  </p-footer>
+</p-dialog>
