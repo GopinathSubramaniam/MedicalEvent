@@ -11,7 +11,7 @@ export class LoginService {
 
 
   authenticate(data){
-    let url = Constants.getUrl(Constants.TYPE.LOGIN);
+    let url = Constants.getUrl(Constants.URL.LOGIN);
     return this.rest.post(url, data);
   }
   

@@ -21,324 +21,409 @@
       </div>
       <!-- /.box-header -->
       <div class="box-body">
-        <div class="row">
-          <div class="box-body">
-            <!-- Event Details #START -->
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label>Event Name</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-calendar-o"></i>
+        <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="box-body">
+              <!-- Event Details #START -->
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label>Event Name</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-calendar-o"></i>
+                        </div>
+                        <input type="text" class="form-control input-sm pull-right" id="name" placeholder="Event Name"
+                          formControlName="Name">
                       </div>
-                      <input type="text" class="form-control input-sm pull-right" id="name" placeholder="Event Name">
+                      <div *ngIf="submitted && f.Name.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.Name.errors.required">Event name is required</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>Start Date</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>Start Date</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-calendar"></i>
+                        </div>
+                        <p-calendar class="datepicker" placeholder="Start Date" formControlName="StartDate" dateFormat="yy-mm-dd">
+                        </p-calendar>
                       </div>
-                      <input type="text" class="form-control input-sm pull-right datepicker" id="name"
-                        placeholder="Start Date">
+                      <div *ngIf="submitted && f.StartDate.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.StartDate.errors.required">Start date is required</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>End Date</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>End Date</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-calendar"></i>
+                        </div>
+                        <p-calendar class="datepicker" id="name" placeholder="End Date" formControlName="EndDate" dateFormat="yy-mm-dd">
+                        </p-calendar>
                       </div>
-                      <input type="text" class=" form-control input-sm  pull-right datepicker" id="name"
-                        placeholder="End Date">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>Registration Close Date</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
+                      <div *ngIf="submitted && f.EndDate.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.EndDate.errors.required">End date is required</div>
                       </div>
-                      <input type="text" class=" form-control input-sm  pull-right datepicker" id="name"
-                        placeholder="Registration Close Date">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>Kit Count</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-list-ol"></i>
-                      </div>
-                      <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="Kit Count">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>Guest Count</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-list-ol"></i>
-                      </div>
-                      <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="Guest Count">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>Upload Video</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-file-video-o"></i>
-                      </div>
-                      <input type="file" class="form-control input-sm  pull-right" id="videoFile"
-                        placeholder="Upload Video">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>Venue (<a href="#"> Choose address from map</a>)</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-thumb-tack"></i>
-                      </div>
-                      <textarea rows="3" class=" form-control input-sm " id="venue"
-                        placeholder="Enter Venue Address"></textarea>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- Event Details #END -->
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>Registration Close Date</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-calendar"></i>
+                        </div>
+                        <p-calendar class="datepicker" placeholder="Registration Close Date"
+                          formControlName="RegistrationCloseDate" dateFormat="yy-mm-dd"></p-calendar>
+                      </div>
+                      <div *ngIf="submitted && f.RegistrationCloseDate.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.RegistrationCloseDate.errors.required">Registration close date is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>Kit Count</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-list-ol"></i>
+                        </div>
+                        <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="Kit Count"
+                          formControlName="KitCount">
+                      </div>
+                      <div *ngIf="submitted && f.KitCount.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.KitCount.errors.required">Kit count is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>Guest Count</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-list-ol"></i>
+                        </div>
+                        <input type="text" class=" form-control input-sm  pull-right" id="name"
+                          placeholder="Guest Count" formControlName="GuestCount">
+                      </div>
+                      <div *ngIf="submitted && f.GuestCount.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.GuestCount.errors.required">Guest count is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>Upload Video</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-file-video-o"></i>
+                        </div>
+                        <input type="file" class="form-control input-sm  pull-right" id="videoFile"
+                          placeholder="Upload Video">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>Venue (<a href="#"> Choose address from map</a>)</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-thumb-tack"></i>
+                        </div>
+                        <textarea rows="3" class=" form-control input-sm " id="venue" placeholder="Enter Venue Address"
+                          formControlName="Venue"></textarea>
+                      </div>
+                      <div *ngIf="submitted && f.Venue.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.Venue.errors.required">Venue is required</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Event Details #END -->
 
-            <!-- Organiser Details #START -->
-            <div class="box-header with-border">
-              <h3 class="box-title">Organiser Details</h3>
-            </div>
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>Organiser Name</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-user"></i>
+              <!-- Organiser Details #START -->
+              <div class="box-header with-border">
+                <h3 class="box-title">Organiser Details</h3>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>Organiser Name</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-user"></i>
+                        </div>
+                        <input type="text" class=" form-control input-sm  pull-right" id="OrganiserName"
+                          placeholder="Organiser Name" formControlName="OrganiserName">
                       </div>
-                      <input type="text" class=" form-control input-sm  pull-right" id="name"
-                        placeholder="Organiser Name">
+                      <div *ngIf="submitted && f.OrganiserName.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.OrganiserName.errors.required">Organiser name is required</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>Email</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-envelope"></i>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>Email</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-envelope"></i>
+                        </div>
+                        <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="Email"
+                          formControlName="email">
                       </div>
-                      <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="Email">
+                      <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>Phone 1</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-phone"></i>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>Phone 1</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-phone"></i>
+                        </div>
+                        <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="Phone 1"
+                          formControlName="username">
                       </div>
-                      <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="Phone 1">
+                      <div *ngIf="submitted && f.username.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.username.errors.required">Phone1 is required</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>Phone 2</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-phone"></i>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>Phone 2</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-phone"></i>
+                        </div>
+                        <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="Phone 2"
+                          formControlName="Phone">
                       </div>
-                      <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="Phone 2">
+                      <div *ngIf="submitted && f.Phone.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.Phone.errors.required">Phone2 is required</div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>GSTIN</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-list-ol"></i>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>GSTIN</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-list-ol"></i>
+                        </div>
+                        <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="GSTIN"
+                          formControlName="GSTIN">
                       </div>
-                      <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="GSTIN">
+                      <div *ngIf="submitted && f.GSTIN.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.GSTIN.errors.required">GSTIN is required</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>PAN #</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-list-ol"></i>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>PAN #</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-list-ol"></i>
+                        </div>
+                        <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="PAN #"
+                          formControlName="PAN">
                       </div>
-                      <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="PAN #">
+                      <div *ngIf="submitted && f.PAN.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.PAN.errors.required">PAN is required</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>CIN #</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-list-ol"></i>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>CIN #</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-list-ol"></i>
+                        </div>
+                        <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="CIN #"
+                          formControlName="CIN">
                       </div>
-                      <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="CIN #">
+                      <div *ngIf="submitted && f.CIN.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.CIN.errors.required">CIN is required</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label>CGST%</label>
-                        <div class="input-group">
-                          <div class="input-group-addon">
-                            <i class="fa fa-percent" aria-hidden="true"></i>
+                  <div class="col-lg-3">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label>CGST%</label>
+                          <div class="input-group">
+                            <div class="input-group-addon">
+                              <i class="fa fa-percent" aria-hidden="true"></i>
+                            </div>
+                            <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="CGST%"
+                              formControlName="CGST">
                           </div>
-                          <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="CGST%">
+                          <div *ngIf="submitted && f.CGST.errors" class="invalid-feedback text-danger">
+                            <div *ngIf="f.CGST.errors.required">CGST is required</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label>SGST%</label>
+                          <div class="input-group">
+                            <div class="input-group-addon">
+                              <i class="fa fa-percent" aria-hidden="true"></i>
+                            </div>
+                            <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="SGST%"
+                              formControlName="SGST">
+                          </div>
+                          <div *ngIf="submitted && f.SGST.errors" class="invalid-feedback text-danger">
+                            <div *ngIf="f.SGST.errors.required">SGST is required</div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label>SGST%</label>
-                        <div class="input-group">
-                          <div class="input-group-addon">
-                            <i class="fa fa-percent" aria-hidden="true"></i>
-                          </div>
-                          <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="SGST%">
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>Website URL</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-link"></i>
                         </div>
+                        <input type="text" class=" form-control input-sm  pull-right" id="name"
+                          placeholder="Website URL" formControlName="URL">
+                      </div>
+                      <div *ngIf="submitted && f.URL.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.URL.errors.required">URL is required</div>
                       </div>
                     </div>
                   </div>
-
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>Address</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-address-card-o" aria-hidden="true"></i>
+                        </div>
+                        <textarea rows="3" class=" form-control input-sm " id="name" placeholder="Address"
+                          formControlName="Address"></textarea>
+                      </div>
+                      <div *ngIf="submitted && f.Address.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.Address.errors.required">Address is required</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+              <!-- Organiser Details #END -->
 
-            <div class="row">
+              <!-- Registration Details #START -->
+              <div class="box-header with-border">
+                <h3 class="box-title">Registration Details</h3>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>Early Bird Date</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-calendar"></i>
+                        </div>
+                        <p-calendar class="datepicker" placeholder="Early Bird Date" formControlName="EarlyBirdDate" dateFormat="yy-mm-dd">
+                        </p-calendar>
+                      </div>
+                      <div *ngIf="submitted && f.EarlyBirdDate.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.EarlyBirdDate.errors.required">Early bird dte is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>Early Bird Price</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-inr"></i>
+                        </div>
+                        <input type="text" class=" form-control input-sm  pull-right" id="name"
+                          placeholder="Early Bird Price" formControlName="EarlyBirdPrice">
+                      </div>
+                      <div *ngIf="submitted && f.EarlyBirdPrice.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.EarlyBirdPrice.errors.required">Early bird price is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>Post Early Bird Price</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-inr"></i>
+                        </div>
+                        <input type="text" class=" form-control input-sm  pull-right" id="postEarlyBird"
+                          placeholder="Post Early Bird Price" formControlName="PostEarlyBirdPrice">
+                      </div>
+                      <div *ngIf="submitted && f.PostEarlyBirdPrice.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.PostEarlyBirdPrice.errors.required">Post early bird price is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label>CME Points</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-list-ol"></i>
+                        </div>
+                        <input type="number" class=" form-control input-sm  pull-right" id="name"
+                          placeholder="Loyal Points" formControlName="CMEPoints">
+                      </div>
+                      <div *ngIf="submitted && f.CMEPoints.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.CMEPoints.errors.required">CME Points is required</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Registration Details #END -->
+
               <div class="col-lg-12">
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>Website URL</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-link"></i>
-                      </div>
-                      <input type="text" class=" form-control input-sm  pull-right" id="name" placeholder="Website URL">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>Address</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-address-card-o" aria-hidden="true"></i>
-                      </div>
-                      <textarea rows="3" class=" form-control input-sm " id="name" placeholder="Address"></textarea>
-                    </div>
-                  </div>
-                </div>
+                <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i> Save
+                  Event</button>
               </div>
-            </div>
-            <!-- Organiser Details #END -->
 
-            <!-- Registration Details #START -->
-            <div class="box-header with-border">
-              <h3 class="box-title">Registration Details</h3>
             </div>
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>Early Bird Date</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                      </div>
-                      <input type="text" class=" form-control input-sm  pull-right datepicker" id="name"
-                        placeholder="Early Bird Date">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>Early Bird Price</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-inr"></i>
-                      </div>
-                      <input type="text" class=" form-control input-sm  pull-right" id="name"
-                        placeholder="Early Bird Price">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>Post Early Bird Price</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-inr"></i>
-                      </div>
-                      <input type="text" class=" form-control input-sm  pull-right" id="postEarlyBird"
-                        placeholder="Post Early Bird Price">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label>CME Points</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-list-ol"></i>
-                      </div>
-                      <input type="number" class=" form-control input-sm  pull-right" id="name"
-                        placeholder="Loyal Points">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Registration Details #END -->
-
-            <div class="col-lg-12">
-              <a href="data.html" class="btn btn-primary pull-right"><i class="fa fa-check"></i> Save
-                Event</a>
-            </div>
-
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </section>

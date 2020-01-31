@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
 import { Labels } from '../util/labels';
 import { NewsletterService } from './newsletter.service';
-import { NgxSpinnerService } from "ngx-spinner";
+import { AppService } from '../helpers/app.service';
 
 @Component({
   selector: 'app-newsletter',
@@ -23,8 +22,7 @@ export class NewsletterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private newsletterService: NewsletterService,
-    private msgService: MessageService,
-    private ngxSpinner: NgxSpinnerService
+    private app: AppService,
   ) { }
 
   ngOnInit() {
@@ -44,9 +42,9 @@ export class NewsletterComponent implements OnInit {
   }
 
   getNewsletterList() {
-    this.ngxSpinner.show();
+    this.app.showSpinner();
     this.newsletterService.getNewsletterList().then((res: any) => {
-      this.ngxSpinner.hide();
+      this.app.hideSpinner();
       this.newsletterList = res;
     });
   }
@@ -55,10 +53,10 @@ export class NewsletterComponent implements OnInit {
     this.submitted = true;
     console.log('Valid = ', this.newsletterForm.valid)
     if (this.newsletterForm.valid) {
-      this.ngxSpinner.show();
+      this.app.showSpinner();
       this.newsletterService.createNewsletter(this.newsletterForm.value, this.selectedFile).then((res: any) => {
-        this.ngxSpinner.hide();
-        this.msgService.add({ severity: 'success', summary: Labels.SUCCESS.TEXT, detail: Labels.SUCCESS.ADDED });
+        this.app.hideSpinner();
+        this.app.showSuccessToast(Labels.SUCCESS.ADDED);
         this.resetNewsletterModal();
         this.getNewsletterList();
       });
@@ -66,10 +64,10 @@ export class NewsletterComponent implements OnInit {
   }
 
   deleteNewsletter() {
-    this.ngxSpinner.show();
+    this.app.showSpinner();
     this.newsletterService.deleteNewsletter(this.selectedId).then((res: any) => {
-      this.ngxSpinner.hide();
-      this.msgService.add({ severity: 'success', summary: Labels.SUCCESS.TEXT, detail: Labels.SUCCESS.DELETED });
+      this.app.hideSpinner();
+      this.app.showSuccessToast(Labels.SUCCESS.DELETED);
       this.displayDeleteConfimModal = false;
       this.resetNewsletterModal();
       this.getNewsletterList();

@@ -11,7 +11,7 @@ export class RegisterService {
   constructor(private rest: RestService) { }
 
   doRegister(data) {
-    let url = Constants.getUrl(Constants.TYPE.REG);
+    let url = Constants.getUrl(Constants.URL.REGISTER);
     return this.rest.post(url, data);
   }
 

@@ -5,13 +5,16 @@ import { EventRoutingModule } from './event-routing.module';
 import { PrimengComponentModule } from '../primeng-component/primeng-component.module';
 import { EventAddComponent } from './event-add/event-add.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [EventListComponent, EventAddComponent, EventDetailComponent],
   imports: [
     CommonModule,
     EventRoutingModule,
-    PrimengComponentModule
+    PrimengComponentModule,
+    ReactiveFormsModule
   ]
 })
 export class EventModule { }

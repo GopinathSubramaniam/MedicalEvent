@@ -12,14 +12,14 @@ export class NewsletterService {
   constructor(private rest: RestService) { }
 
   getNewsletterList() {
-    let url = Constants.getUrl(Constants.TYPE.NEWSLETTER);
+    let url = Constants.getUrl(Constants.URL.NEWSLETTER);
     return this.rest.get(url);
   }
 
   createNewsletter(data, file) {
     return new Promise((resolve, reject) => {
       this.rest.uploadFile(file).then((res: any) => {
-        let url = Constants.getUrl(Constants.TYPE.NEWSLETTER);
+        let url = Constants.getUrl(Constants.URL.NEWSLETTER);
         delete data.id;
         delete data.file;
         data.Image = res[0];
@@ -31,7 +31,7 @@ export class NewsletterService {
   }
 
   deleteNewsletter(id) {
-    let url = Constants.getUrl(Constants.TYPE.NEWSLETTER) + '/' + id;
+    let url = Constants.getUrl(Constants.URL.NEWSLETTER) + '/' + id;
     return this.rest.delete(url);
   }
 

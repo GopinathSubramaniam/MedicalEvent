@@ -5,5 +5,12 @@ export const Labels = {
       UPDATED: 'Updated successfully',
       DELETED: 'Deleted successfully'
 
-   }
+   },
+   WARN: {
+      TEXT: 'Warning Message'
+   },
+   ERROR: {
+      TEXT: 'Error Message'
+   },
+   
 }

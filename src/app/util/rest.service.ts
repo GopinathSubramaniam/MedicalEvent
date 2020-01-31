@@ -32,7 +32,7 @@ export class RestService {
   uploadFile(file) {
     let auth = 'bearer ' + sessionStorage.getItem('jwtToken');
     let headers = { headers: new HttpHeaders({ Authorization: auth }) };
-    let url = Constants.getUrl(Constants.TYPE.FILE_UPLOAD);
+    let url = Constants.getUrl(Constants.URL.FILE_UPLOAD);
     let formData = new FormData();
     formData.append('files', file);
     return this.http.post(url, formData, headers).toPromise();
