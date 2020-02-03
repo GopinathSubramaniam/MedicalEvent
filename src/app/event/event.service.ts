@@ -37,4 +37,9 @@ export class EventService {
     });
   }
 
+  getEventList() {
+    let url = Constants.getUrl(Constants.URL.EVENT);
+    return this.rest.get(url);
+  }
+
 }

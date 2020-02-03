@@ -39,43 +39,41 @@
           </div>
         </div>
 
-        <div>
-          <p-tabView>
-            <p-tabPanel header="Detail">
-              <ng-container *ngTemplateOutlet="detail"></ng-container>
-            </p-tabPanel>
-            <p-tabPanel header="Sessions">
-              <ng-container *ngTemplateOutlet="sessions"></ng-container>
-            </p-tabPanel>
-            <p-tabPanel header="Free Coupons">
-              <ng-container *ngTemplateOutlet="freeCoupons"></ng-container>
-            </p-tabPanel>
-            <p-tabPanel header="Certificate">
-              <ng-container *ngTemplateOutlet="certificate"></ng-container>
-            </p-tabPanel>
-            <p-tabPanel header="Event Users">
-              <ng-container *ngTemplateOutlet="eventUsers"></ng-container>
-            </p-tabPanel>
-            <p-tabPanel header="Stalls">
-              <ng-container *ngTemplateOutlet="stalls"></ng-container>
-            </p-tabPanel>
-            <p-tabPanel header="Rating Views">
-              <ng-container *ngTemplateOutlet="ratingViews"></ng-container>
-            </p-tabPanel>
-            <p-tabPanel header="Manage Food">
-              <ng-container *ngTemplateOutlet="manageFood"></ng-container>
-            </p-tabPanel>
-            <p-tabPanel header="Payment Info">
-              <ng-container *ngTemplateOutlet="paymentInfo"></ng-container>
-            </p-tabPanel>
-            <p-tabPanel header="Interactive Session">
-              <ng-container *ngTemplateOutlet="interactiveSession"></ng-container>
-            </p-tabPanel>
-            <p-tabPanel header="QR Codes">
-              <ng-container *ngTemplateOutlet="qrCodes"></ng-container>
-            </p-tabPanel>
-          </p-tabView>
-        </div>
+        <mk-tabs [headerStyleClass]="pull-left">
+          <mk-tab header="Detail">
+            <ng-container *ngTemplateOutlet="detail"></ng-container>
+          </mk-tab>
+          <mk-tab header="Sessions">
+            <ng-container *ngTemplateOutlet="sessions"></ng-container>
+          </mk-tab>
+          <mk-tab header="Free Coupons">
+            <ng-container *ngTemplateOutlet="freeCoupons"></ng-container>
+          </mk-tab>
+          <mk-tab header="Certificate">
+            <ng-container *ngTemplateOutlet="certificate"></ng-container>
+          </mk-tab>
+          <mk-tab header="Event Users">
+            <ng-container *ngTemplateOutlet="eventUsers"></ng-container>
+          </mk-tab>
+          <mk-tab header="Stalls">
+            <ng-container *ngTemplateOutlet="stalls"></ng-container>
+          </mk-tab>
+          <mk-tab header="Rating Views">
+            <ng-container *ngTemplateOutlet="ratingViews"></ng-container>
+          </mk-tab>
+          <mk-tab header="Manage Food">
+            <ng-container *ngTemplateOutlet="manageFood"></ng-container>
+          </mk-tab>
+          <mk-tab header="Payment Info">
+            <ng-container *ngTemplateOutlet="paymentInfo"></ng-container>
+          </mk-tab>
+          <mk-tab header="Interactive Session">
+            <ng-container *ngTemplateOutlet="interactiveSession"></ng-container>
+          </mk-tab>
+          <mk-tab header="QR Codes">
+            <ng-container *ngTemplateOutlet="qrCodes"></ng-container>
+          </mk-tab>
+        </mk-tabs>
 
       </div>
     </div>
@@ -514,8 +512,9 @@
         <div class="input-group-addon">
           <i class="fa fa-clock-o"></i>
         </div>
-        <p-calendar hideOnDateTimeSelect="true" showTime="true" hourFormat="24" placeholder="Date Time Range" showButtonBar="true"
-          [baseZIndex]="3005" [appendTo]="'body'" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
+        <p-calendar hideOnDateTimeSelect="true" showTime="true" hourFormat="24" placeholder="Date Time Range"
+          showButtonBar="true" [baseZIndex]="3005" [appendTo]="'body'" [style]="{'width':'100%'}"
+          [inputStyle]="{'width':'100%'}">
         </p-calendar>
       </div>
     </div>

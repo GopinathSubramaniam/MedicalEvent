@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
+import { AppService } from '../helpers/app.service';
+import { Labels } from '../util/labels';
 
 
 @Component({
@@ -16,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private app: AppService
   ) { }
 
   ngOnInit() {
@@ -28,14 +31,17 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.valid) {
+      this.app.showSpinner();
       this.loginService.authenticate(this.loginForm.value).then((res: any) => {
         console.log('Login res = ', res);
+        this.app.hideSpinner();
         if (res.jwt) {
           sessionStorage.setItem('jwtToken', res.jwt);
           sessionStorage.setItem('userName', res.user.username);
           this.router.navigate(['/']);
         } else {
           console.warn('SignIn Failed');
+          this.app.showErrorToast(Labels.PLZ_TRY_AGAIN);
         }
       });
     }

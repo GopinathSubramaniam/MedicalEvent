@@ -29,7 +29,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           if (error.status == 401) {
             errorMessage = 'Unauthorized Error';
           } else if (error.status == 500) {
-            errorMessage = 'Something went wrong. Please logout and login again';
+            errorMessage = 'Something went wrong. Please try again later';
           }
           if (error.status !== 400) {
             let obj = { code: error.status, msg: errorMessage };

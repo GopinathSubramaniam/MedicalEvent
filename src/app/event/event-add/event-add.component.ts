@@ -23,7 +23,7 @@ export class EventAddComponent implements OnInit {
   ngOnInit() {
     this.eventForm = this.formBuilder.group({
       OrganiserName: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       Phone: ['', [Validators.required]],
       username: ['', [Validators.required]],
       GSTIN: ['', [Validators.required]],
@@ -59,7 +59,11 @@ export class EventAddComponent implements OnInit {
         Name: formObj.OrganiserName,
         Phone: formObj.Phone,
         username: formObj.username,
-        password: '123456'
+        password: '123456',
+        blocked: false,
+        role: '5e33ddfa14194d03e8d90946',
+        provider: 'local',
+        confirmed: true
       };
 
       let organiserDetail = {
@@ -85,7 +89,10 @@ export class EventAddComponent implements OnInit {
         EarlyBirdPrice: formObj.Name,
         PostEarlyBirdPrice: formObj.Name,
         CMEPoints: formObj.Name,
-        organiser_detail: ''
+        organiser_detail: '',
+        BEventVideo: null,
+        Lng: 0,
+        Lat: 0
       };
 
       let obj = { user: user, organiserDetail: organiserDetail, eventDetail: eventDetail };

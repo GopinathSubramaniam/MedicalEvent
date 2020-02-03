@@ -13,11 +13,18 @@ export const Constants = {
    MSG: {
       SOMETHING_WENT_WRONG: 'Something went wrong'
    },
-   getUrl: getUrl
+   getUrl: getUrl,
+   getToken: getToken
 }
 
 
 function getUrl(childPath) {
    let url = this.URL.BASE + childPath;
    return url;
+}
+
+
+function getToken() {
+   let token = sessionStorage.getItem('jwtToken');
+   return token;
 }

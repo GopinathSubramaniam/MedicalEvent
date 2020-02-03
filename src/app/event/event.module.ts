@@ -6,6 +6,7 @@ import { PrimengComponentModule } from '../primeng-component/primeng-component.m
 import { EventAddComponent } from './event-add/event-add.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TabsModule } from 'angular-admin-lte';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     EventRoutingModule,
     PrimengComponentModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TabsModule
   ]
 })
 export class EventModule { }

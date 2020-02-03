@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { AppService } from '../helpers/app.service';
 import { Labels } from '../util/labels';
 import { SettingService } from './setting.service';
 
@@ -26,7 +27,8 @@ export class SettingComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private settingService: SettingService,
-    private msgService: MessageService
+    private msgService: MessageService,
+    private app: AppService
   ) { }
 
   ngOnInit() {
@@ -40,13 +42,17 @@ export class SettingComponent implements OnInit {
   }
 
   getQualiList() {
+    this.app.showSpinner();
     this.settingService.getQualificationList().then((res: any) => {
       this.qualificationList = res;
+      this.app.hideSpinner();
     });
   }
 
   getIDProofList() {
+    this.app.showSpinner();
     this.settingService.getIDProofList().then((res: any) => {
+      this.app.hideSpinner();
       this.idproofList = res;
     });
   }
@@ -71,6 +77,7 @@ export class SettingComponent implements OnInit {
   createIdProof() {
     this.idSubmitted = true;
     if (this.idproofForm.valid) {
+      this.app.showSpinner();
       let data = this.idproofForm.value;
       let promise = null;
       let msg = Labels.SUCCESS.ADDED;
@@ -84,7 +91,8 @@ export class SettingComponent implements OnInit {
         this.displayIDProofDialog = false;
         this.resetIDProofForm();
         this.getIDProofList();
-        this.msgService.add({ severity: 'success', summary: Labels.SUCCESS.TEXT, detail: msg });
+        this.app.showSuccessToast(msg);
+        this.app.hideSpinner();
       });
     }
   }
@@ -92,6 +100,7 @@ export class SettingComponent implements OnInit {
   createQualification() {
     this.qSubmitted = true;
     if (this.qualificationForm.valid) {
+      this.app.showSpinner();
       let data = this.qualificationForm.value;
       let promise = null;
       let msg = Labels.SUCCESS.ADDED;
@@ -106,7 +115,8 @@ export class SettingComponent implements OnInit {
         this.displayQualiDialog = false;
         this.resetQualiForm();
         this.getQualiList();
-        this.msgService.add({ severity: 'success', summary: Labels.SUCCESS.TEXT, detail: msg });
+        this.app.showSuccessToast(msg);
+        this.app.hideSpinner();
       });
     }
   }
@@ -135,18 +145,22 @@ export class SettingComponent implements OnInit {
   }
 
   deleteQualification(id) {
+    this.app.showSpinner();
     this.settingService.deleteQualification(id).then((res: any) => {
-      this.msgService.add({ severity: 'success', summary: Labels.SUCCESS.TEXT, detail: Labels.SUCCESS.DELETED });
+      this.app.showSuccessToast(Labels.SUCCESS.DELETED)
       this.displayDeleteConfimModal = false;
       this.getQualiList();
+      this.app.hideSpinner();
     });
   }
 
   deleteIDProof(id) {
+    this.app.showSpinner();
     this.settingService.deleteIdProof(id).then((res: any) => {
-      this.msgService.add({ severity: 'success', summary: Labels.SUCCESS.TEXT, detail: Labels.SUCCESS.DELETED });
+      this.app.showSuccessToast(Labels.SUCCESS.DELETED)
       this.displayDeleteConfimModal = false;
       this.getIDProofList();
+      this.app.hideSpinner();
     });
   }
 

@@ -18,6 +18,7 @@ import { HttpErrorInterceptor } from './util/http-error.interceptor';
 import { RestService } from './util/rest.service';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { TabsModule } from 'angular-admin-lte';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     PrimengComponentModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    TabsModule
   ],
   declarations: [
     AppComponent,

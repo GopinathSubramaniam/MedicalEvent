@@ -12,5 +12,6 @@ export const Labels = {
    ERROR: {
       TEXT: 'Error Message'
    },
-   
+   PLZ_TRY_AGAIN: 'Server error. Please try again later'
+
 }
