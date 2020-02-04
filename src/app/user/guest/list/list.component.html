@@ -1,3 +1,172 @@
-<p>
-  list works!
-</p>
+<div class="padding-zero">
+  <section class="content-header">
+    <h4>
+      <i class="fa fa-users"></i> Guest Users
+    </h4>
+    <ol class="breadcrumb">
+      <li><a routerLink="/"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Guest Users</li>
+    </ol>
+  </section>
+  <section class="content">
+    <p-table #dt [value]="guestUsers" [responsive]="true" [paginator]="true" [rows]="10"
+      [rowsPerPageOptions]="[10,30,50]" [globalFilterFields]="['Name']">
+      <ng-template pTemplate="caption">
+        <div class="row">
+          <div class="col-xs-12 col-md-12">
+            <div class="row">
+              <div class="col-xs-12 col-md-2">
+                <div class="form-group">
+                  <label>Search</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control input-sm" id="search" placeholder="Search">
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-2">
+                <div class="form-group">
+                  <label>Event</label>
+                  <div class="input-group">
+                    <select class="form-control input-sm" style="width: 13em;">
+                      <option>--- Select ---</option>
+                      <option>Benifits Session</option>
+                      <option>Bodycheckup</option>
+                      <option>Diabetic Session</option>
+                      <option>Benifits Session</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-2">
+                <div class="form-group">
+                  <label>City</label>
+                  <div class="input-group">
+                    <select class="form-control input-sm" style="width: 13em;">
+                      <option>--- City ---</option>
+                      <option>Coimbatore</option>
+                      <option>Erode</option>
+                      <option>Chennai</option>
+                      <option>London</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-2">
+                <div class="form-group">
+                  <label>&nbsp;</label>
+                  <div class="input-group">
+                    <button class="btn btn-primary btn-sm"> <i class="fa fa-search"></i> Search</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-4">
+                <div class="form-group pull-right m-0">
+                  <label>&nbsp;</label>
+                  <div class="input-group">
+                    <a routerLink="add" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add New Event</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th [pSortableColumn]="'Name'">
+            Name
+            <p-sortIcon [field]="'Name'"></p-sortIcon>
+          </th>
+          <th [pSortableColumn]="'organiser'">
+            Email
+            <p-sortIcon [field]="'organiser'"></p-sortIcon>
+          </th>
+          <th [pSortableColumn]="'StartDate'">
+            Phone1
+            <p-sortIcon [field]="'StartDate'"></p-sortIcon>
+          </th>
+          <th [pSortableColumn]="'EndDate'">
+            GSTIN#
+            <p-sortIcon [field]="'EndDate'"></p-sortIcon>
+          </th>
+          <th [pSortableColumn]="'Publish'">
+            PAN#
+            <p-sortIcon [field]="'Publish'"></p-sortIcon>
+          </th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-guestUser>
+        <tr>
+          <td>
+            <span class="ui-column-title">Name</span>
+            {{guestUser.Name}}
+          </td>
+          <td>
+            <span class="ui-column-title">Organiser</span>
+            {{guestUser.Email}}
+          </td>
+          <td>
+            <span class="ui-column-title">Start Date</span>
+            {{guestUser.UserName}}
+          </td>
+          <td>
+            <span class="ui-column-title">End Date</span>
+            {{guestUser.GSTIN}}
+          </td>
+          <td>
+            <span class="ui-column-title">Publish</span>
+            {{guestUser.PAN}}
+          </td>
+          <td>
+            <a routerLink="detail" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View</a>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </section>
+</div>
+
+<p-dialog header="Add Event" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade"
+  [modal]="true" [style]="{width: '300px'}" [baseZIndex]="3003" [styleClass]="dialogWarn-fix" [appendTo]="'body'">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="vin">Name</label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" class="form-control" id="brand" autofocus />
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Organiser</label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" class="form-control" id="brand" autofocus />
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="brand">Start Date</label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" class="form-control" id="brand" autofocus />
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="color">End Date</label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" class="form-control" id="brand" autofocus />
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" class="btn btn-primary" icon="fa fa-close" (click)="delete()">Delete</button>
+      <button type="button" class="btn btn-primary" icon="fa fa-check" (click)="save()">Save</button>
+    </div>
+  </p-footer>
+</p-dialog>

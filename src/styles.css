@@ -62,3 +62,10 @@ pr-1 {
   min-width: 150px !important;
   width: 0px;
 }
+
+
+.dropdown-menu>li>a {
+  color: #777;
+  padding-top: 1rem;
+  border-bottom: 1px solid lightgray;
+}

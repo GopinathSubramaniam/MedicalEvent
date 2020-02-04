@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GuestListComponent implements OnInit {
 
+  guestUsers: any[];
+
   constructor() { }
 
   ngOnInit() {
