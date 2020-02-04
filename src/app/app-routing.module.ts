@@ -53,7 +53,8 @@ const routes: Routes = [
     data: {
       customLayout: true
     }
-  }
+  },
+  { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({

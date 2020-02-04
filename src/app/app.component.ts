@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
       this.customLayout = value;
     });
 
-   /*  let userName = sessionStorage.getItem('userName');
-    if (!userName) this.router.navigate(['/login']); */
+    /*  let userName = sessionStorage.getItem('userName');
+     if (!userName) this.router.navigate(['/login']); */
   }
 }

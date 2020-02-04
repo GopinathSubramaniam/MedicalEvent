@@ -18,6 +18,7 @@ export class HeaderInnerComponent implements OnInit {
   }
 
   logout() {
+    sessionStorage.clear();
     this.router.navigate(['/login']);
   }
 

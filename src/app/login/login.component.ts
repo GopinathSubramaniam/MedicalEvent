@@ -27,6 +27,11 @@ export class LoginComponent implements OnInit {
       identifier: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
+
+    let token = sessionStorage.getItem('jwtToken');
+    if (token) {
+      this.router.navigate(['/']);
+    }
   }
 
   onSubmit() {

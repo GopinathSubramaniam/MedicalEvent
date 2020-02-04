@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'src/app/helpers/app.service';
 
 @Component({
   selector: 'app-event-detail',
@@ -21,7 +22,7 @@ export class EventDetailComponent implements OnInit {
   displayCouponListModal: boolean = false;
   displayQRCodeModal: boolean = false;
 
-  constructor() { }
+  constructor(private app: AppService) { }
 
   ngOnInit() {
     this.getSessions();
@@ -64,13 +65,19 @@ export class EventDetailComponent implements OnInit {
     ];
   }
 
-  getRatingList(){
+  getRatingList() {
     this.ratingList = [
       { user: 'Moguls', overAll: 4, topics: 4, speaker: 4, food: 4, desc: 'Good event. Lots of benefits' },
       { user: 'Bite', overAll: 4, topics: 4, speaker: 4, food: 4, desc: 'Good event. Lots of benefits' },
       { user: 'Amal', overAll: 4, topics: 4, speaker: 4, food: 4, desc: 'Good event. Lots of benefits' },
       { user: 'Peter', overAll: 4, topics: 4, speaker: 4, food: 4, desc: 'Good event. Lots of benefits' }
     ];
+  }
+
+  editSession() {
+    this.app.deleteConfirm().then((val) => {
+      console.log(val);
+    });
   }
 
 }
