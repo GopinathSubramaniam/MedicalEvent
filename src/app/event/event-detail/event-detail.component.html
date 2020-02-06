@@ -1,10 +1,10 @@
 <section class="content-header">
   <h4>
-    <i class="fa fa-file"></i> {{eventDetail.Name}}
+    <i class="fa fa-calendar-o"></i> {{eventDetail.Name}}
   </h4>
   <ol class="breadcrumb">
     <li><a routerLink="/"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li routerLink="/events">Event List</li>
+    <li routerLink="/events" class="pointer">Event List</li>
     <li class="active">{{eventDetail.Name}}</li>
   </ol>
 </section>
@@ -84,61 +84,49 @@
   <div>
     <div class="row">
       <!-- Event Details #START -->
-      <div class="col-sm-6">
+      <div class="col-sm-12 col-md-6">
         <div class="box-header with-border">
           <h3 class="box-title">
             <i class="fa fa-calendar-o" aria-hidden="true"></i> Event Detail
           </h3>
         </div>
-        <div class="row">
+        <div>
           <div class="form-group">
             <label class="col-sm-4 control-label">Name</label>
             <div class="col-sm-8">
               <p>{{eventDetail.Name}}</p>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="form-group">
             <label class="col-sm-4 control-label">Start Date</label>
             <div class="col-sm-8">
               <p>{{eventDetail.StartDate | date: 'dd/MM/yyyy'}}</p>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="form-group">
             <label class="col-sm-4 control-label">End Date</label>
             <div class="col-sm-8">
               <p>{{eventDetail.EndDate | date: 'dd/MM/yyyy'}}</p>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="form-group">
             <label class="col-sm-4 control-label">Registration Close Date</label>
             <div class="col-sm-8">
               <p>{{eventDetail.RegistrationCloseDate | date: 'dd/MM/yyyy'}}</p>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="form-group">
             <label class="col-sm-4 control-label">Registration Fee</label>
             <div class="col-sm-8">
               <p><i class="fa fa-inr"></i> 0.00</p>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="form-group">
             <label class="col-sm-4 control-label">Kit Count</label>
             <div class="col-sm-8">
               <p>{{eventDetail.KitCount}}</p>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="form-group">
             <label class="col-sm-4 control-label">Venue</label>
             <div class="col-sm-8">
@@ -150,98 +138,78 @@
       <!-- Event Details #END -->
 
       <!-- Organiser Details #START -->
-      <div class="col-lg-6">
+      <div class="col-sm-12 col-md-6">
         <div class="box-header with-border">
           <h3 class="box-title">
             <i class="fa fa-tripadvisor" aria-hidden="true"></i> Organiser Detail
           </h3>
         </div>
-        <div class="row">
+        <div>
           <div class="form-group">
             <label class="col-sm-4 control-label">Organiser</label>
             <div class="col-sm-8">
-              <p>{{eventDetail.organiser_detail.Name}}</p>
+              <p>{{eventDetail.organiser_detail.Name || 'NA' }}</p>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="form-group">
             <label class="col-sm-4 control-label">Email</label>
             <div class="col-sm-8">
-              <p>{{eventDetail.organiser_detail.Email}}</p>
+              <p>{{eventDetail.organiser_detail.Email || 'NA'}}</p>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="form-group">
             <label class="col-sm-4 control-label">Phone 1</label>
             <div class="col-sm-8">
-              <p>{{eventDetail.organiser_detail.Phone}}</p>
+              <p>{{eventDetail.organiser_detail.Phone || 'NA'}}</p>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="form-group">
             <label class="col-sm-4 control-label">Phone 2</label>
             <div class="col-sm-8">
-              <p>{{eventDetail.organiser_detail.Phone1}}</p>
+              <p>{{eventDetail.organiser_detail.Phone1 || 'NA'}}</p>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="form-group">
             <label class="col-sm-4 control-label">GSTIN #</label>
             <div class="col-sm-8">
-              <p>{{eventDetail.organiser_detail.GSTIN}}</p>
+              <p>{{eventDetail.organiser_detail.GSTIN || 'NA'}}</p>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="form-group">
             <label class="col-sm-4 control-label">PAN #</label>
             <div class="col-sm-8">
-              <p>{{eventDetail.organiser_detail.PAN}}</p>
+              <p>{{eventDetail.organiser_detail.PAN || 'NA'}}</p>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="form-group">
             <label class="col-sm-4 control-label">CIN #</label>
             <div class="col-sm-8">
-              <p>{{eventDetail.organiser_detail.CIN}}</p>
+              <p>{{eventDetail.organiser_detail.CIN || 'NA'}}</p>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="form-group">
             <label class="col-sm-4 control-label">CGST%</label>
             <div class="col-sm-8">
-              <p>{{eventDetail.organiser_detail.CGST}}</p>
+              <p>{{eventDetail.organiser_detail.CGST || 'NA'}}</p>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="form-group">
             <label class="col-sm-4 control-label">SGST%</label>
             <div class="col-sm-8">
-              <p>{{eventDetail.organiser_detail.SGST}}</p>
+              <p>{{eventDetail.organiser_detail.SGST || 'NA'}}</p>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="form-group">
             <label class="col-sm-4 control-label">Website Url</label>
             <div class="col-sm-8">
-              <p><a href="#" style="text-decoration: underline;">{{eventDetail.organiser_detail.URL}}</a>
+              <p><a href="#" style="text-decoration: underline;">{{eventDetail.organiser_detail.URL || 'NA'}}</a>
               </p>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="form-group">
             <label class="col-sm-4 control-label">Address</label>
             <div class="col-sm-8">
-              <p>{{eventDetail.organiser_detail.Address}}</p>
+              <p>{{eventDetail.organiser_detail.Address || 'NA'}}</p>
             </div>
           </div>
         </div>
@@ -249,37 +217,31 @@
       <!-- Organiser Details #END -->
     </div>
     <!-- Registration Details #START -->
-    <div>
+    <div class="container-fluid row">
       <div class="box-header with-border">
         <h3 class="box-title">
           <i class="fa fa-registered" aria-hidden="true"></i> Registration Detail
         </h3>
       </div>
-      <div class="row">
+      <div class="">
         <div class="form-group">
           <label class="col-sm-4 control-label">Early Bird Date</label>
           <div class="col-sm-8">
             <p>{{eventDetail.EarlyBirdDate | date: 'dd/MM/yyyy'}}</p>
           </div>
         </div>
-      </div>
-      <div class="row">
         <div class="form-group">
           <label class="col-sm-4 control-label">Early Bird Price</label>
           <div class="col-sm-8">
             <p><i class="fa fa-inr"></i> {{eventDetail.EarlyBirdPrice | number: '1.2-2'}}</p>
           </div>
         </div>
-      </div>
-      <div class="row">
         <div class="form-group">
           <label class="col-sm-4 control-label">Post Early Bird Price</label>
           <div class="col-sm-8">
             <p><i class="fa fa-inr"></i> {{eventDetail.PostEarlyBirdPrice | number: '1.2-2'}}</p>
           </div>
         </div>
-      </div>
-      <div class="row">
         <div class="form-group">
           <label class="col-sm-4 control-label">CME Points</label>
           <div class="col-sm-8">
@@ -782,7 +744,7 @@
 
 
 <!-- ngprime Dialogs #START-->
-<p-dialog header="" [(visible)]="displayCreateSessionModal" [styleClass]="'dialog-sm'" [responsive]="true"
+<p-dialog header="" [(visible)]="displayCreateSessionModal" [styleClass]="'popup-width'" [responsive]="true"
   showEffect="fade" [modal]="true" [baseZIndex]="3003" [appendTo]="'body'" (onHide)="resetSessionForm()">
   <p-header>
     {{sessionModalHeader}}
@@ -860,7 +822,7 @@
 </p-dialog>
 
 
-<p-dialog header="Create Free Entry Coupon" [(visible)]="displayCreateCouponModal" [styleClass]="'dialog-sm'"
+<p-dialog header="Create Free Entry Coupon" [(visible)]="displayCreateCouponModal" [styleClass]="'popup-width'"
   [responsive]="true" showEffect="fade" [modal]="true" [baseZIndex]="3003" [appendTo]="'body'">
   <div>
     <div class="form-group">
@@ -904,7 +866,7 @@
   </p-footer>
 </p-dialog>
 
-<p-dialog header="Upload Files" [(visible)]="displayUploadFilesModal" [styleClass]="'dialog-sm'" [responsive]="true"
+<p-dialog header="Upload Files" [(visible)]="displayUploadFilesModal" [styleClass]="'popup-width'" [responsive]="true"
   showEffect="fade" [modal]="true" [baseZIndex]="3003" [appendTo]="'body'">
   <div>
     <div class="form-group">
