@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { EventListComponent } from './event-list/event-list.component';
 import { EventRoutingModule } from './event-routing.module';
 import { PrimengComponentModule } from '../module/primeng-component.module';
@@ -17,6 +17,7 @@ import { TabsModule } from 'angular-admin-lte';
     PrimengComponentModule,
     ReactiveFormsModule,
     TabsModule
-  ]
+  ],
+  providers: [DatePipe]
 })
 export class EventModule { }

@@ -100,7 +100,7 @@
                         <div class="input-group-addon">
                           <i class="fa fa-list-ol"></i>
                         </div>
-                        <input type="text" class=" form-control input-sm  pull-right" placeholder="Kit Count"
+                        <input type="number" class=" form-control input-sm  pull-right" placeholder="Kit Count"
                           formControlName="KitCount">
                       </div>
                       <div *ngIf="submitted && f.KitCount.errors" class="invalid-feedback text-danger">
@@ -115,7 +115,7 @@
                         <div class="input-group-addon">
                           <i class="fa fa-list-ol"></i>
                         </div>
-                        <input type="text" class=" form-control input-sm  pull-right" placeholder="Guest Count"
+                        <input type="number" class=" form-control input-sm  pull-right" placeholder="Guest Count"
                           formControlName="GuestCount">
                       </div>
                       <div *ngIf="submitted && f.GuestCount.errors" class="invalid-feedback text-danger">
@@ -378,7 +378,7 @@
                         <div class="input-group-addon">
                           <i class="fa fa-inr"></i>
                         </div>
-                        <input type="text" class=" form-control input-sm  pull-right" placeholder="Early Bird Price"
+                        <input type="number" class=" form-control input-sm  pull-right" placeholder="Early Bird Price"
                           formControlName="EarlyBirdPrice">
                       </div>
                       <div *ngIf="submitted && f.EarlyBirdPrice.errors" class="invalid-feedback text-danger">
@@ -393,7 +393,7 @@
                         <div class="input-group-addon">
                           <i class="fa fa-inr"></i>
                         </div>
-                        <input type="text" class=" form-control input-sm  pull-right" id="postEarlyBird"
+                        <input type="number" class=" form-control input-sm  pull-right" id="postEarlyBird"
                           placeholder="Post Early Bird Price" formControlName="PostEarlyBirdPrice">
                       </div>
                       <div *ngIf="submitted && f.PostEarlyBirdPrice.errors" class="invalid-feedback text-danger">

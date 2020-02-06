@@ -16,7 +16,7 @@ export class EventService {
   ) { }
 
   createEvent(data) {
-    return new Promise((reject, resolve) => {
+    return new Promise((resolve, reject) => {
       //Posting user detail
       this.regService.doRegister(data.user).then((resUser: any) => {
         console.log('resUser = ', resUser);
@@ -30,7 +30,9 @@ export class EventService {
           //Posting event detail
           this.rest.post(eventUrl, data.eventDetail).then((finalRes: any) => {
             console.log('finalRes = ', finalRes);
-            resolve(finalRes);
+            resolve(true);
+          }).then((err) => {
+            resolve(false);
           });
         });
       });
@@ -40,6 +42,32 @@ export class EventService {
   getEventList() {
     let url = Constants.getUrl(Constants.URL.EVENT);
     return this.rest.get(url);
+  }
+
+  getEventDetail(id) {
+    let url = Constants.getUrl(Constants.URL.EVENT);
+    url += '/' + id;
+    return this.rest.get(url);
+  }
+
+  createSession(data: any) {
+    let url = Constants.getUrl(Constants.URL.SESSION);
+    if (data.id) {
+      url += '/' + data.id;
+      return this.rest.put(url, data);
+    } else {
+      return this.rest.post(url, data);
+    }
+  }
+
+  getSessionList() {
+    let url = Constants.getUrl(Constants.URL.SESSION);
+    return this.rest.get(url);
+  }
+
+  deleteSession(id){
+    let url = Constants.getUrl(Constants.URL.SESSION)+'/'+id;
+    return this.rest.delete(url);
   }
 
 }

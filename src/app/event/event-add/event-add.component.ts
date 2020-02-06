@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EventService } from '../event.service';
 import { AppService } from '../../helpers/app.service';
 import { Labels } from 'src/app/util/labels';
+import { Constants } from 'src/app/util/constants';
 
 @Component({
   selector: 'app-event-add',
@@ -79,28 +80,33 @@ export class EventAddComponent implements OnInit {
 
       let eventDetail = {
         Name: formObj.Name,
-        StartDate: formObj.Name,
-        EndDate: formObj.Name,
-        RegistrationCloseDate: formObj.Name,
-        KitCount: formObj.Name,
-        GuestCount: formObj.Name,
-        Venue: formObj.Name,
-        EarlyBirdDate: formObj.Name,
-        EarlyBirdPrice: formObj.Name,
-        PostEarlyBirdPrice: formObj.Name,
-        CMEPoints: formObj.Name,
+        StartDate: Constants.formatDate(formObj.StartDate),
+        EndDate: Constants.formatDate(formObj.EndDate),
+        RegistrationCloseDate: Constants.formatDate(formObj.RegistrationCloseDate),
+        KitCount: formObj.KitCount,
+        GuestCount: formObj.GuestCount,
+        Venue: formObj.Venue,
+        EarlyBirdDate: Constants.formatDate(formObj.EarlyBirdDate),
+        EarlyBirdPrice: formObj.EarlyBirdPrice,
+        PostEarlyBirdPrice: formObj.PostEarlyBirdPrice,
+        CMEPoints: formObj.CMEPoints,
         organiser_detail: '',
         BEventVideo: null,
-        Lng: 0,
-        Lat: 0
+        Lng: 1,
+        Lat: 1,
+        Publish: true
       };
 
       let obj = { user: user, organiserDetail: organiserDetail, eventDetail: eventDetail };
 
-      this.eventService.createEvent(obj).then((res) => {
-        this.onReset();
-        this.app.hideSpinner();
-        this.app.showSuccessToast(Labels.SUCCESS.ADDED);
+      this.eventService.createEvent(obj).then((created) => {
+        if (created) {
+          this.onReset();
+          this.app.hideSpinner();
+          this.app.showSuccessToast(Labels.SUCCESS.ADDED);
+        } else {
+          this.app.showErrorToast(Labels.PLZ_TRY_AGAIN);
+        }
       });
     }
   }

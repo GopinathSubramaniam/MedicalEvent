@@ -8,13 +8,15 @@ export const Constants = {
       NEWSLETTER: '/newsletters',
       FILE_UPLOAD: '/upload/',
       EVENT: '/events',
-      ORGANISER_DETAILS: '/organiser-details'
+      ORGANISER_DETAILS: '/organiser-details',
+      SESSION: '/sessions'
    },
    MSG: {
       SOMETHING_WENT_WRONG: 'Something went wrong'
    },
    getUrl: getUrl,
-   getToken: getToken
+   getToken: getToken,
+   formatDate: formatDate
 }
 
 
@@ -27,4 +29,13 @@ function getUrl(childPath) {
 function getToken() {
    let token = sessionStorage.getItem('jwtToken');
    return token;
+}
+
+function formatDate(date) {
+   let day = date.getDate();
+   let month = date.getMonth() + 1; // add 1 because months are indexed from 0
+   if (month < 10) month = ('0' + month);
+   if (day < 10) day = ('0' + day);
+   let year = date.getFullYear();
+   return (year + '-' + month + '-' + day);
 }

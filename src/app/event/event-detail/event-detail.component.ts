@@ -1,18 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/helpers/app.service';
+import { Labels } from 'src/app/util/labels';
+import { EventService } from '../event.service';
 
 @Component({
   selector: 'app-event-detail',
   templateUrl: './event-detail.component.html',
   styleUrls: ['./event-detail.component.css']
 })
-export class EventDetailComponent implements OnInit {
+export class EventDetailComponent implements OnInit, OnDestroy {
 
+
+  eventId: string;
+  eventDetail: any = { organiser_detail: {} };
+
+  // Session variables #START
+  sessionModalHeader: string = 'New Session';
+  sessionFormSubmitted: boolean = false;
+  sessionForm: FormGroup;
   sessionList: any[];
+  // Session variabled #END
+
   freeCouponList: any[];
   eventUserList: any[];
   stallList: any[];
   ratingList: any[];
+
+  paramSubscribe: Subscription;
 
   displayCreateSessionModal: boolean = false;
   displayCreateCouponModal: boolean = false;
@@ -22,22 +40,45 @@ export class EventDetailComponent implements OnInit {
   displayCouponListModal: boolean = false;
   displayQRCodeModal: boolean = false;
 
-  constructor(private app: AppService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private app: AppService,
+    private formBuilder: FormBuilder,
+    private eventService: EventService,
+    private datePipe: DatePipe
+  ) { }
 
   ngOnInit() {
+    this.paramSubscribe = this.route.paramMap.subscribe(params => {
+      console.log('Event Id = ', params.get('id'));
+      this.eventId = params.get('id');
+      this.getEventDetail();
+    });
     this.getSessions();
     this.getFreeCouponList();
     this.getEventUserList();
     this.getStallList();
     this.getRatingList();
+    this.initValidator();
   }
 
-  getSessions() {
-    this.sessionList = [
-      { title: 'Sangameshwar', dateTimeRange: '01/07/2020 12:00 AM - 01/07/2020 11:59 PM', type: 'Free' },
-      { title: 'Sangameshwar', dateTimeRange: '01/07/2020 12:00 AM - 01/07/2020 11:59 PM', type: 'Free' }
-    ];
+  ngOnDestroy(): void {
+    if (this.paramSubscribe) {
+      this.paramSubscribe.unsubscribe();
+    }
   }
+
+  initValidator() {
+    this.sessionForm = this.formBuilder.group({
+      id: ['', []],
+      Title: ['', [Validators.required]],
+      StartDate: ['', [Validators.required]],
+      EndDate: ['', [Validators.required]],
+      Fee: ['', [Validators.required]],
+    });
+  }
+
+  get f() { return this.sessionForm.controls; }
 
   getFreeCouponList() {
     this.freeCouponList = [
@@ -74,10 +115,82 @@ export class EventDetailComponent implements OnInit {
     ];
   }
 
-  editSession() {
-    this.app.deleteConfirm().then((val) => {
-      console.log(val);
+  getEventDetail() {
+    this.app.showSpinner();
+    this.eventService.getEventDetail(this.eventId).then(res => {
+      this.eventDetail = res;
+      this.app.hideSpinner();
+    }).catch(err => {
+      this.app.hideSpinner();
     });
   }
+
+  // Session events #START
+  createSession() {
+    this.sessionFormSubmitted = true;
+    if (this.sessionForm.valid) {
+      this.app.showSpinner();
+      let obj = this.sessionForm.value;
+      obj.organiser_detail = this.eventDetail.organiser_detail.id;
+      this.eventService.createSession(obj).then((res) => {
+        this.app.hideSpinner();
+        if (obj.id) {
+          this.app.showSuccessToast(Labels.SUCCESS.UPDATED);
+        } else {
+          this.app.showSuccessToast(Labels.SUCCESS.ADDED);
+        }
+        this.resetSessionForm();
+        this.getSessions();
+      }).catch(err => {
+        this.app.hideSpinner();
+      });
+    }
+  }
+
+  getSessions() {
+    this.eventService.getSessionList().then((res: any) => {
+      this.sessionList = res;
+    });
+  }
+
+  editSession(sessionId) {
+    console.log('ID = ', sessionId);
+    let sessObj = this.sessionList.filter((item) => {
+      return item.id === sessionId;
+    });
+    if (sessObj && sessObj.length > 0) {
+      this.sessionModalHeader = 'Edit Session';
+      let data = sessObj[0];
+      let stDte = new Date(this.datePipe.transform(data.StartDate, 'yyyy-MM-dd HH:mm'));
+      let edDte = new Date(this.datePipe.transform(data.EndDate, 'yyyy-MM-dd HH:mm'));
+      let obj = { id: data.id, StartDate: stDte, EndDate: edDte, Fee: data.Fee, Title: data.Title };
+      this.sessionForm.patchValue(obj);
+      this.displayCreateSessionModal = true;
+    }
+  }
+
+  deleteSession(id) {
+    this.app.deleteConfirm().then((val) => {
+      if (val) {
+        this.app.showSpinner();
+        this.eventService.deleteSession(id).then((res) => {
+          this.app.hideSpinner();
+          this.app.showSuccessToast(Labels.SUCCESS.DELETED);
+          this.getSessions();
+        });
+      }
+    });
+  }
+
+  resetSessionForm() {
+    this.displayCreateSessionModal = false;
+    this.sessionForm.reset();
+    this.sessionModalHeader = 'New Session';
+  }
+
+  // Session events #END
+
+
+
 
 }

@@ -1,11 +1,11 @@
 <section class="content-header">
   <h4>
-    <i class="fa fa-file"></i> Woundcare
+    <i class="fa fa-file"></i> {{eventDetail.Name}}
   </h4>
   <ol class="breadcrumb">
     <li><a routerLink="/"><i class="fa fa-dashboard"></i> Home</a></li>
     <li routerLink="/events">Event List</li>
-    <li class="active">Woundcare</li>
+    <li class="active">{{eventDetail.Name}}</li>
   </ol>
 </section>
 
@@ -94,7 +94,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">Name</label>
             <div class="col-sm-8">
-              <p>Woundcare</p>
+              <p>{{eventDetail.Name}}</p>
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">Start Date</label>
             <div class="col-sm-8">
-              <p>20-01-2020</p>
+              <p>{{eventDetail.StartDate | date: 'dd/MM/yyyy'}}</p>
             </div>
           </div>
         </div>
@@ -110,7 +110,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">End Date</label>
             <div class="col-sm-8">
-              <p>21-01-2020</p>
+              <p>{{eventDetail.EndDate | date: 'dd/MM/yyyy'}}</p>
             </div>
           </div>
         </div>
@@ -118,7 +118,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">Registration Close Date</label>
             <div class="col-sm-8">
-              <p>15-01-2020</p>
+              <p>{{eventDetail.RegistrationCloseDate | date: 'dd/MM/yyyy'}}</p>
             </div>
           </div>
         </div>
@@ -126,7 +126,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">Registration Fee</label>
             <div class="col-sm-8">
-              <p><i class="fa fa-inr"></i> 300.00</p>
+              <p><i class="fa fa-inr"></i> 0.00</p>
             </div>
           </div>
         </div>
@@ -134,7 +134,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">Kit Count</label>
             <div class="col-sm-8">
-              <p>10</p>
+              <p>{{eventDetail.KitCount}}</p>
             </div>
           </div>
         </div>
@@ -142,9 +142,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">Venue</label>
             <div class="col-sm-8">
-              <p>35/1, Muniappan kovil street</p>
-              <p>Maari amman kovil street</p>
-              <p>Erode-638004</p>
+              <p>{{eventDetail.Venue}}</p>
             </div>
           </div>
         </div>
@@ -162,7 +160,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">Organiser</label>
             <div class="col-sm-8">
-              <p>Yogesh</p>
+              <p>{{eventDetail.organiser_detail.Name}}</p>
             </div>
           </div>
         </div>
@@ -170,7 +168,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">Email</label>
             <div class="col-sm-8">
-              <p>itsupport@nexware-global.com</p>
+              <p>{{eventDetail.organiser_detail.Email}}</p>
             </div>
           </div>
         </div>
@@ -178,7 +176,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">Phone 1</label>
             <div class="col-sm-8">
-              <p>+91-9637752262</p>
+              <p>{{eventDetail.organiser_detail.Phone}}</p>
             </div>
           </div>
         </div>
@@ -186,7 +184,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">Phone 2</label>
             <div class="col-sm-8">
-              <p>+91-9637752262</p>
+              <p>{{eventDetail.organiser_detail.Phone1}}</p>
             </div>
           </div>
         </div>
@@ -194,7 +192,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">GSTIN #</label>
             <div class="col-sm-8">
-              <p>ASDF12313123ZZXZ</p>
+              <p>{{eventDetail.organiser_detail.GSTIN}}</p>
             </div>
           </div>
         </div>
@@ -202,7 +200,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">PAN #</label>
             <div class="col-sm-8">
-              <p>BOKPG6920E</p>
+              <p>{{eventDetail.organiser_detail.PAN}}</p>
             </div>
           </div>
         </div>
@@ -210,7 +208,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">CIN #</label>
             <div class="col-sm-8">
-              <p>BOKPG6920E</p>
+              <p>{{eventDetail.organiser_detail.CIN}}</p>
             </div>
           </div>
         </div>
@@ -218,7 +216,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">CGST%</label>
             <div class="col-sm-8">
-              <p>10%</p>
+              <p>{{eventDetail.organiser_detail.CGST}}</p>
             </div>
           </div>
         </div>
@@ -226,7 +224,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">SGST%</label>
             <div class="col-sm-8">
-              <p>10%</p>
+              <p>{{eventDetail.organiser_detail.SGST}}</p>
             </div>
           </div>
         </div>
@@ -234,7 +232,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">Website Url</label>
             <div class="col-sm-8">
-              <p><a href="#" style="text-decoration: underline;">https://translate.google.co.jp/?hl=en&tab=rT</a>
+              <p><a href="#" style="text-decoration: underline;">{{eventDetail.organiser_detail.URL}}</a>
               </p>
             </div>
           </div>
@@ -243,9 +241,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">Address</label>
             <div class="col-sm-8">
-              <p>35/1, Muniappan kovil street</p>
-              <p>Maari amman kovil street</p>
-              <p>Erode-638004</p>
+              <p>{{eventDetail.organiser_detail.Address}}</p>
             </div>
           </div>
         </div>
@@ -263,23 +259,23 @@
         <div class="form-group">
           <label class="col-sm-4 control-label">Early Bird Date</label>
           <div class="col-sm-8">
-            <p>15-01-2020</p>
+            <p>{{eventDetail.EarlyBirdDate | date: 'dd/MM/yyyy'}}</p>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="form-group">
-          <label class="col-sm-4 control-label">Price</label>
+          <label class="col-sm-4 control-label">Early Bird Price</label>
           <div class="col-sm-8">
-            <p><i class="fa fa-inr"></i> 500.00</p>
+            <p><i class="fa fa-inr"></i> {{eventDetail.EarlyBirdPrice | number: '1.2-2'}}</p>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="form-group">
-          <label class="col-sm-4 control-label">Post Early Bird</label>
+          <label class="col-sm-4 control-label">Post Early Bird Price</label>
           <div class="col-sm-8">
-            <p><i class="fa fa-inr"></i> 500.00</p>
+            <p><i class="fa fa-inr"></i> {{eventDetail.PostEarlyBirdPrice | number: '1.2-2'}}</p>
           </div>
         </div>
       </div>
@@ -287,7 +283,7 @@
         <div class="form-group">
           <label class="col-sm-4 control-label">CME Points</label>
           <div class="col-sm-8">
-            <p>50</p>
+            <p>{{eventDetail.CMEPoints}}</p>
           </div>
         </div>
       </div>
@@ -301,22 +297,24 @@
     <ng-template pTemplate="header">
       <tr>
         <th>Title</th>
-        <th>Date Time Range</th>
-        <th>Type</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Fee</th>
         <th>Action</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-data>
       <tr>
-        <td>{{data.title}}</td>
-        <td>{{data.dateTimeRange}}</td>
-        <td>{{data.type}}</td>
+        <td>{{data.Title}}</td>
+        <td>{{data.StartDate | date: 'dd/MM/yyyy HH:mm'}}</td>
+        <td>{{data.EndDate | date: 'dd/MM/yyyy HH:mm'}}</td>
+        <td><i class="fa fa-inr"></i> {{data.Fee | number: '1.2-2'}}</td>
         <td>
-          <button class="btn btn-xs btn-primary" (click)="displayCreateSessionModal = true;">
+          <button class="btn btn-xs btn-primary" (click)="editSession(data.id)">
             <i class="fa fa-pencil"></i>
             Edit
           </button>
-          <button class="btn btn-danger btn-xs" (click)="editSession(data.id)">
+          <button class="btn btn-danger btn-xs" (click)="deleteSession(data.id)">
             <i class="fa fa-trash"></i> Delete
           </button>
         </td>
@@ -784,52 +782,81 @@
 
 
 <!-- ngprime Dialogs #START-->
-<p-dialog header="Create Session" [(visible)]="displayCreateSessionModal" [styleClass]="'dialog-sm'" [responsive]="true"
-  showEffect="fade" [modal]="true" [baseZIndex]="3003" [appendTo]="'body'">
+<p-dialog header="" [(visible)]="displayCreateSessionModal" [styleClass]="'dialog-sm'" [responsive]="true"
+  showEffect="fade" [modal]="true" [baseZIndex]="3003" [appendTo]="'body'" (onHide)="resetSessionForm()">
+  <p-header>
+    {{sessionModalHeader}}
+  </p-header>
   <div>
-    <div class="form-group">
-      <label>Title</label>
-      <div class="input-group">
-        <div class="input-group-addon">
-          <i class="fa fa-tag"></i>
+    <form [formGroup]="sessionForm" (ngSubmit)="createSession()">
+      <input type="hidden" formControlName="id">
+      <div class="form-group">
+        <label>Title</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-tag"></i>
+          </div>
+          <input type="text" formControlName="Title" class="form-control pull-right" id="title" placeholder="Title">
         </div>
-        <input type="text" class="form-control pull-right" id="title" placeholder="Title">
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Date Time Range</label>
-      <div class="input-group">
-        <div class="input-group-addon">
-          <i class="fa fa-clock-o"></i>
+        <div *ngIf="sessionFormSubmitted && f.Title.errors" class="invalid-feedback text-danger">
+          <div *ngIf="f.Title.errors.required">Title is required</div>
         </div>
-        <p-calendar hideOnDateTimeSelect="true" showTime="true" hourFormat="24" placeholder="Date Time Range"
-          showButtonBar="true" [baseZIndex]="3005" [appendTo]="'body'" [style]="{'width':'100%'}"
-          [inputStyle]="{'width':'100%'}">
-        </p-calendar>
       </div>
-    </div>
-    <div class="form-group">
-      <label>Session Fee</label>
-      <div class="input-group">
-        <div class="input-group-addon">
-          <i class="fa fa-money"></i>
+      <div class="form-group">
+        <label>Start Date</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-calendar-o"></i>
+          </div>
+          <p-calendar formControlName="StartDate" hideOnDateTimeSelect="true" showTime="true" hourFormat="24"
+            placeholder="Date Time Range" showButtonBar="true" [baseZIndex]="3005" [appendTo]="'body'"
+            [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
+          </p-calendar>
         </div>
-        <input type="number" class="form-control pull-right" id="cost" placeholder="Cost" value="0">
+        <div *ngIf="sessionFormSubmitted && f.StartDate.errors" class="invalid-feedback text-danger">
+          <div *ngIf="f.StartDate.errors.required">Start date is required</div>
+        </div>
       </div>
-      <small>Enter cost <b>0</b> if this session is Free</small>
-    </div>
+      <div class="form-group">
+        <label>End Date</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-calendar-o"></i>
+          </div>
+          <p-calendar formControlName="EndDate" hideOnDateTimeSelect="true" showTime="true" hourFormat="24"
+            placeholder="Date Time Range" showButtonBar="true" [baseZIndex]="3005" [appendTo]="'body'"
+            [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
+          </p-calendar>
+        </div>
+        <div *ngIf="sessionFormSubmitted && f.EndDate.errors" class="invalid-feedback text-danger">
+          <div *ngIf="f.EndDate.errors.required">End date is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Session Fee</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-money"></i>
+          </div>
+          <input type="number" formControlName="Fee" class="form-control pull-right" id="cost" placeholder="Cost"
+            value="0">
+        </div>
+        <div *ngIf="sessionFormSubmitted && f.Fee.errors" class="invalid-feedback text-danger">
+          <div *ngIf="f.Fee.errors.required">Fee is required</div>
+        </div>
+        <small>Enter cost <b>0</b> if this session is Free</small>
+      </div>
+      <div class="form-group pull-right">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"
+          (click)="displayCreateSessionModal = false;">
+          <i class="fa fa-times"></i> Close
+        </button>
+        <button type="submit" class="btn btn-primary btn-sm">
+          <i class="fa fa-check"></i> Save
+        </button>
+      </div>
+    </form>
   </div>
-  <p-footer>
-    <div>
-      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"
-        (click)="displayCreateSessionModal = false;">
-        <i class="fa fa-times"></i> Close
-      </button>
-      <button type="button" class="btn btn-primary btn-sm" (click)="displayCreateSessionModal = false;">
-        <i class="fa fa-check"></i> Save
-      </button>
-    </div>
-  </p-footer>
 </p-dialog>
 
 
