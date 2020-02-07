@@ -15,4 +15,9 @@ export class RegisterService {
     return this.rest.post(url, data);
   }
 
+  updateUser(id, data) {
+    let url = Constants.getUrl(Constants.URL.USER) + '/' + id;
+    return this.rest.put(url, data);
+  }
+
 }

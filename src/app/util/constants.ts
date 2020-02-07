@@ -2,6 +2,7 @@ export const Constants = {
    URL: {
       BASE: 'http://192.168.100.209:1337',
       REGISTER: '/auth/local/register',
+      USER: '/users',
       LOGIN: '/auth/local',
       QUAL: '/qualifications',
       IDPROOF: '/id-proofs',

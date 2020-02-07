@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../event.service';
+import { AppService } from 'src/app/helpers/app.service';
+import { Labels } from 'src/app/util/labels';
 
 @Component({
   selector: 'app-event-list',
@@ -13,20 +15,12 @@ export class EventListComponent implements OnInit {
   cols: any[];
   events: any[];
 
-  constructor(private eventService: EventService) { }
+  constructor(
+    private eventService: EventService,
+    private app: AppService
+  ) { }
 
   ngOnInit() {
-    /* this.cols = [
-      { field: 'name', header: 'Name' },
-      { field: 'organiser', header: 'Organiser' },
-      { field: 'startDate', header: 'Start Date' },
-      { field: 'endDate', header: 'End Date' },
-      { field: 'publish', header: 'Publish' }
-    ]; */
-   /*  this.events = [
-      { name: 'Basic Event', organiser: 'NexWare', startDate: '12-01-2020', endDate: '13-01-2020', publish: 'Sanga' },
-      { name: 'Public Event', organiser: 'NexWare', startDate: '14-01-2020', endDate: '15-01-2020', publish: 'Yogesh' }
-    ]; */
     this.getEventList();
   }
 
@@ -42,6 +36,24 @@ export class EventListComponent implements OnInit {
     this.eventService.getEventList().then((res: any) => {
       console.log('getEventList = ', res);
       this.events = res;
+    });
+  }
+
+  deleteEvent(id) {
+    this.app.deleteConfirm().then(val => {
+      if (val) {
+        console.log('Delete Called. Id = ', id);
+        let objs = this.events.filter((item) => {
+          return item.id === id;
+        });
+        if (objs && objs.length > 0) {
+          let obj = objs[0];
+          this.eventService.deleteEvent(obj.id, obj.organiser_detail.id, obj.organiser_detail.user).then((res) => {
+            this.app.showSuccessToast(Labels.SUCCESS.DELETED);
+            this.getEventList();
+          });
+        }
+      }
     });
   }
 

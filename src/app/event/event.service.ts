@@ -24,11 +24,37 @@ export class EventService {
         //Posting organiser detail
         data.organiserDetail.user = resUser.user.id;
         this.rest.post(organiserDetailUrl, data.organiserDetail).then((orgRes: any) => {
-          console.log('orgRes = ', orgRes);
+
           let eventUrl = Constants.getUrl(Constants.URL.EVENT);
           data.eventDetail.organiser_detail = orgRes.id;
           //Posting event detail
           this.rest.post(eventUrl, data.eventDetail).then((finalRes: any) => {
+            console.log('finalRes = ', finalRes);
+            resolve(true);
+          }).then((err) => {
+            resolve(false);
+          });
+        });
+      });
+    });
+  }
+
+  updateEvent(ids: any, data) {
+    return new Promise((resolve, reject) => {
+      //Posting user detail
+      this.regService.updateUser(ids.userId, data.user).then((resUser: any) => {
+        console.log('resUser = ', resUser);
+        let organiserDetailUrl = Constants.getUrl(Constants.URL.ORGANISER_DETAILS) + '/' + ids.organiserId;
+
+        //Posting organiser detail
+        data.organiserDetail.user = ids.userId;
+        this.rest.put(organiserDetailUrl, data.organiserDetail).then((orgRes: any) => {
+          console.log('orgRes = ', orgRes);
+          let eventUrl = Constants.getUrl(Constants.URL.EVENT) + '/' + ids.eventId;
+          // data.eventDetail.organiser_detail = orgRes.id;
+
+          //Posting event detail
+          this.rest.put(eventUrl, data.eventDetail).then((finalRes: any) => {
             console.log('finalRes = ', finalRes);
             resolve(true);
           }).then((err) => {
@@ -65,9 +91,31 @@ export class EventService {
     return this.rest.get(url);
   }
 
-  deleteSession(id){
-    let url = Constants.getUrl(Constants.URL.SESSION)+'/'+id;
+  deleteSession(id) {
+    let url = Constants.getUrl(Constants.URL.SESSION) + '/' + id;
     return this.rest.delete(url);
+  }
+
+  deleteEvent(eventId, organiserId, userId) {
+    return new Promise((resolve, reject) => {
+      let url = Constants.getUrl(Constants.URL.EVENT) + '/' + eventId;
+      this.rest.delete(url).then((res) => {
+        resolve(res);
+        /* let organiserDeleteUrl = Constants.getUrl(Constants.URL.ORGANISER_DETAILS) + '/' + organiserId;
+        this.rest.delete(organiserDeleteUrl).then((res) => {
+          let userDeleteUrl = Constants.getUrl(Constants.URL.USER) + '/' + userId;
+          this.rest.delete(userDeleteUrl).then((res) => {
+            resolve(res);
+          }).catch((err) => {
+            reject(err);
+          });;
+        }).catch((err) => {
+          reject(err);
+        }); */
+      }).catch((err) => {
+        reject(err);
+      });
+    });
   }
 
 }

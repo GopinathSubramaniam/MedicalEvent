@@ -1,28 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EventService } from '../event.service';
-import { AppService } from '../../helpers/app.service';
-import { Labels } from 'src/app/util/labels';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Constants } from 'src/app/util/constants';
+import { Labels } from 'src/app/util/labels';
+import { AppService } from '../../helpers/app.service';
+import { EventService } from '../event.service';
 
 @Component({
   selector: 'app-event-add',
   templateUrl: './event-add.component.html',
   styleUrls: ['./event-add.component.css']
 })
-export class EventAddComponent implements OnInit {
+export class EventAddComponent implements OnInit, OnDestroy {
 
+  minStartDate: any = new Date();
+  minEndDate: any = new Date();
+  minRegCloseDate: any = new Date();
+
+  eventId: string;
   eventForm: FormGroup;
+  eventDetail: any = { organiser_detail: {} };
   submitted = false;
+  paramSubscribe: Subscription;
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private formBuilder: FormBuilder,
     private eventService: EventService,
     private app: AppService
   ) { }
 
   ngOnInit() {
+    this.initValidation();
+    this.paramSubscribe = this.route.paramMap.subscribe(params => {
+      this.eventId = params.get('id');
+      if (this.eventId) this.getEventDetail();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.paramSubscribe.unsubscribe();
+  }
+
+  initValidation() {
     this.eventForm = this.formBuilder.group({
+      id: ['', []],
       OrganiserName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       Phone: ['', [Validators.required]],
@@ -55,6 +79,7 @@ export class EventAddComponent implements OnInit {
     if (this.eventForm.valid) {
       this.app.showSpinner();
       let formObj = this.eventForm.value;
+
       let user = {
         email: formObj.email,
         Name: formObj.OrganiserName,
@@ -80,13 +105,13 @@ export class EventAddComponent implements OnInit {
 
       let eventDetail = {
         Name: formObj.Name,
-        StartDate: Constants.formatDate(formObj.StartDate),
-        EndDate: Constants.formatDate(formObj.EndDate),
-        RegistrationCloseDate: Constants.formatDate(formObj.RegistrationCloseDate),
+        StartDate: Constants.formatDate(new Date(formObj.StartDate)),
+        EndDate: Constants.formatDate(new Date(formObj.EndDate)),
+        RegistrationCloseDate: Constants.formatDate(new Date(formObj.RegistrationCloseDate)),
         KitCount: formObj.KitCount,
         GuestCount: formObj.GuestCount,
         Venue: formObj.Venue,
-        EarlyBirdDate: Constants.formatDate(formObj.EarlyBirdDate),
+        EarlyBirdDate: Constants.formatDate(new Date(formObj.EarlyBirdDate)),
         EarlyBirdPrice: formObj.EarlyBirdPrice,
         PostEarlyBirdPrice: formObj.PostEarlyBirdPrice,
         CMEPoints: formObj.CMEPoints,
@@ -99,11 +124,27 @@ export class EventAddComponent implements OnInit {
 
       let obj = { user: user, organiserDetail: organiserDetail, eventDetail: eventDetail };
 
-      this.eventService.createEvent(obj).then((created) => {
+      let promise = null;
+      if (this.eventId) {
+        let ids = { eventId: this.eventDetail.id, userId: this.eventDetail.organiser_detail.user, organiserId: this.eventDetail.organiser_detail.id };
+        obj.organiserDetail.user = ids.userId;
+        obj.eventDetail.organiser_detail = ids.organiserId;
+
+        promise = this.eventService.updateEvent(ids, obj);
+      } else {
+        promise = this.eventService.createEvent(obj);
+      }
+
+      promise.then((created) => {
         if (created) {
           this.onReset();
           this.app.hideSpinner();
-          this.app.showSuccessToast(Labels.SUCCESS.ADDED);
+          if (this.eventId) {
+            this.app.showSuccessToast(Labels.SUCCESS.UPDATED);
+            this.router.navigate(['/events']);
+          } else {
+            this.app.showSuccessToast(Labels.SUCCESS.ADDED);
+          }
         } else {
           this.app.showErrorToast(Labels.PLZ_TRY_AGAIN);
         }
@@ -111,9 +152,48 @@ export class EventAddComponent implements OnInit {
     }
   }
 
+  getEventDetail() {
+    this.app.showSpinner();
+    this.eventService.getEventDetail(this.eventId).then((res: any) => {
+      let obj = res;
+      obj.GSTIN = res.organiser_detail.GSTIN;
+      obj.PAN = res.organiser_detail.PAN;
+      obj.CIN = res.organiser_detail.CIN;
+      obj.CGST = res.organiser_detail.CGST;
+      obj.SGST = res.organiser_detail.SGST;
+      obj.URL = res.organiser_detail.URL;
+      obj.Address = res.organiser_detail.Address;
+      this.eventDetail = obj;
+      this.eventForm.patchValue(obj);
+      this.app.hideSpinner();
+    }).catch(err => {
+      this.app.hideSpinner();
+    });
+  }
+
   onReset() {
     this.submitted = false;
     this.eventForm.reset();
+  }
+
+  onStartDateSelect(ev) {
+    console.log(ev);
+    this.minEndDate = this.eventForm.value.StartDate;
+    this.minRegCloseDate = this.eventForm.value.StartDate;
+    if (this.eventForm.value.StartDate > this.eventForm.value.EndDate) {
+      this.eventForm.patchValue({ 'EndDate': this.minRegCloseDate });
+    }
+    if (this.eventForm.value.RegistrationCloseDate < this.eventForm.value.EndDate) {
+      this.eventForm.patchValue({ 'RegistrationCloseDate': this.eventForm.value.EndDate });
+    }
+  }
+
+  onEndDateSelect(ev) {
+    console.log(ev);
+    this.minRegCloseDate = this.eventForm.value.EndDate;
+    if (this.eventForm.value.RegistrationCloseDate < this.eventForm.value.EndDate) {
+      this.eventForm.patchValue({ 'RegistrationCloseDate': this.minRegCloseDate });
+    }
   }
 
 }

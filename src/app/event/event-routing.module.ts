@@ -12,6 +12,9 @@ const routes: Routes = [{
   path: 'add',
   component: EventAddComponent
 }, {
+  path: 'add/:id',
+  component: EventAddComponent
+}, {
   path: 'detail/:id',
   component: EventDetailComponent
 }];
